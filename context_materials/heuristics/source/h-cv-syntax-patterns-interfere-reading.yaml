@@ -1,0 +1,59 @@
+id: h-cv-syntax-patterns-interfere-reading
+description: >
+  When scoring **CV** only: treat **run-on sentences**, **comma splices**, and **fragments** (training p.7) as the
+  primary **sentence-structure** patterns that interfere with or distract from communication when they are frequent or
+  severe — not merely cosmetic. Pair with p.6: structure errors force re-reading and inference of meaning.
+grounded_in: |
+  EQAO CV training pp.6–7 (sentence structure / common errors with incorrect examples).
+consumes:
+  - cv-rhythm-disruption
+  - cv-boundary-collapse
+  - cv-meaning-flow
+decision: |
+  CV: If the response shows **frequent** run-ons, comma splices, or fragments (as in the training exemplars), treat that
+  as **rhythm and boundary** failure — not as “ideas are understandable therefore Adequate.”
+
+  When `cv-boundary-collapse` or `cv-rhythm-disruption` is high, **cap** at **Limited (2)** or hold at **Adequate (3)**
+  only if errors are genuinely occasional and reading is smooth — not when every paragraph shows structural breakdown.
+
+  Meaning clarity **does not** override missing sentence boundaries or chronic splices; align with **distract** vs **do
+  not distract** wording in the rubric.
+boundary: 2 vs 3 (and 1 vs 2 when collapse is extreme)
+risk: May over-penalize bilingual or developmental patterns if “fragment” is mis-detected.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Limited vs Adequate turns on whether errors distract; training names concrete patterns that typically interfere.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-771a68c12a940f29.md
+    link: direct
+    rubric_excerpts:
+      - code: "20"
+        text: |-
+          Errors in conventions distract from communication.
+        highlights: []
+      - code: "30"
+        text: |-
+          Errors in conventions do not distract from communication.
+        highlights: []
+  training_material:
+    high_level: >-
+      Training p.6 — sentence structure / re-reading; p.7 — run-on, comma splice, fragments with incorrect examples.
+    references: >-
+      data-container/prod/extracted/training-materials/cv-scorer-training-elements.yaml
+    link: indirect
+    training_element_ids:
+      - cv-train-page6-sentence-structure-syntax
+      - cv-train-page7-common-errors-runon-comma-fragments
+      - cv-train-page10-usage-incorrect-examples
+      - cv-train-page11-grammar-pronouns-and-agreement
+      - cv-train-page12-grammar-tense-adverb-article-verbform
+      - cv-train-page13-punctuation-expectations
+      - cv-train-page15-classification-descriptors
+  exemplar_selection:
+    high_level: >-
+      Link anchors or training responses that illustrate interfere/distract via run-ons, splices, or fragments.
+    references: |-
+      data-container/prod/extracted/training-materials/guides/wi-1130-sp9-CV.md
+      data-container/prod/extracted/rationales/osslt/cv/<band>/t<taqr_id>.md
+    link: weak

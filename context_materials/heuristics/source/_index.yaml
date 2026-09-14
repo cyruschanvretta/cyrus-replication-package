@@ -1,0 +1,55 @@
+description: >
+  Union of all heuristics (TD + CV + OR). Strand-filtered runs use _index-td, _index-cv, or _index-or via
+  workflow-routing.
+heuristics:
+  - h-boundary-1-vs-2
+  - h-boundary-3-vs-4
+  - h-surface-vs-integration
+  - h-informational-multi-point-thorough
+  - h-resist-under-scoring-rich-persuasive
+  - h-strict-1-when-responses-thin
+  - h-grade-2-requires-analytic-move
+  - h-3-vs-4-sustained-throughout
+  - h-tighten-2-vs-3-generic-assertion
+  - h-td-named-without-unpacking-floor-2
+  - h-td-multi-example-thorough-band4
+  - h-td-parallel-complaints-limited2
+  - h-td-uneven-development-prefer-4
+  - h-td-no-polish-required-for-4
+  - h-cv-meaning-impaired-first
+  - h-cv-thorough-when-clean
+  - h-cv-limited-when-fragments
+  - h-cv-prefer-4-when-meaning-clear
+  - h-cv-thorough-not-4-when-heavy-errors
+  - h-td-boundary-4-vs-5
+  - h-td-boundary-5-vs-6
+  - h-td-resist-auto-4-when-thin
+  - h-cv-adequate-clear-but-flawed
+  - h-or-evidence-from-selection
+  - h-or-organizational-signal
+  - h-or-relevant-detail-density
+  - h-strict-2-vs-3-unpacking-required
+  - h-ignore-mechanical-structure-for-5-vs-6
+  - h-td-ignore-mechanical-structure-for-5-6
+  - h-td-reward-pseudo-stats-and-named-entities
+  - h-td-specificity-threshold-5
+  - h-td-named-entity-limit
+  - h-td-prevent-laundry-list-overscore
+  - h-td-threshold-for-6-thoughtful-progression
+  - h-td-ignore-mechanical-for-5
+  - h-td-prevent-laundry-list-3
+  - h-td-linkage-audit-requirement
+  - h-td-prevent-mechanical-penalty-for-6
+  - h-td-consequence-anchor-check
+  - h-td-consequence-over-structure
+  - h-td-linkage-audit-strict
+  - h-td-consequence-audit-for-5
+  - h-td-consequence-audit-requirement
+  - h-td-decouple-mechanics-from-depth
+  - h-td-consequence-anchor-audit
+  - h-td-laundry-list-penalty
+  - h-td-ignore-mechanics-for-5-6
+  - h-cv-rhythm-threshold
+  - h-cv-error-tolerance
+  - h-cv-structural-collapse-1-vs-2
+  - h-cv-systemic-penalty-2-vs-3

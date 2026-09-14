@@ -1,0 +1,97 @@
+id: h-td-ignore-mechanics-for-5-6
+description: >-
+  The model is currently penalizing Band 5 and 6 responses for using 'mechanical' transitions (e.g.,
+  'Firstly', 'Secondly', 'To begin with'). In the 5/6 bands, the distinction is the specificity and
+  thoughtfulness of the details, not the sophistication of the transitions. The model must ignore
+  transition style if the 'consequence-based reasoning' is present.
+grounded_in: >-
+  Grounded in taqr_ids: 437118961, 428613492, 160800944
+
+  For 437118961, the model capped at 5 because of predictable structure; for 428613492, it capped at
+  5 because of mechanical transitions despite high specificity.
+consumes:
+  - td-consequence-linkage-density
+  - td-technical-specificity-index
+decision: >-
+  When evaluating the transition from Band 4 to Band 5 or 6, you MUST explicitly ignore the presence
+  of mechanical or predictable transitions (e.g., 'Firstly', 'Secondly', 'In addition', 'To begin
+  with'). 
+
+
+  Instead, focus your assessment entirely on the 'Consequence Audit'. Check if the concrete nouns
+  identified in `td-detail-unpack-depth` are paired with 'analytic glue' (consequences, impacts, or
+  why/how). 
+
+
+  If the student provides highly specific, non-generic details (e.g., 'S.A.D.', 'Vitamin D', 'supply
+  chain issues') and connects them to an impact, they are eligible for Band 5 or 6, even if the
+  organization is 'mechanical' or 'predictable'. 
+
+
+  DO NOT withhold a 5 or 6 score simply because the student uses a standard school-essay structure.
+  The distinction is the 'thoughtfulness' of the content, not the 'sophistication' of the prose.
+boundary: 4 vs 5/6
+risk: Could over-score very thin 3s that use 'First, Second' with high-level nouns.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights: []
+      - code: "60"
+        text: >-
+          The essay is related to the assigned prompt. A clear and consistent opinion is developed
+          with
+
+          sufficient specific supporting details that are thoughtfully chosen. The content
+          organization is
+
+          coherent and demonstrates a thoughtful progression of ideas.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      Concrete scored responses in extracted rationales match taqr ids cited in grounded_in; use
+      them to sanity-check the boundary.
+    references: >-
+      Resolved from grounded_in: data-container/prod/extracted/rationales/osslt/td/6/t437118961.md
+
+      Broader pool pattern: data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md
+      (tpcl/ mirrors).
+
+      Cross-check taqr_id from platform exports; older ids may not resolve here.
+    link: indirect

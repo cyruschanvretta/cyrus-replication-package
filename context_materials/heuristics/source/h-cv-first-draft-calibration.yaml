@@ -1,0 +1,57 @@
+id: h-cv-first-draft-calibration
+description: >
+  When scoring **CV** only: calibrate to **first-draft** conditions — students did not have the regular review
+  process (feedback, peer editors, etc.). Do not expect publication polish; isolated slips compatible with strong bands
+  when meaning and control are evident.
+grounded_in: |
+  EQAO CV training: first-draft reminder (wi-1130-sp9-CV and sibling guides).
+consumes:
+  - cv-meaning-flow
+  - cv-error-band
+  - cv-mechanics
+decision: |
+  CV: If `meaning_flow` is clear and errors are local, do **not** treat the response as if it had been edited to a final
+  draft. Prefer the **higher** defensible band on true borderlines when the only issue is minor mechanics that do not
+  derail reading.
+
+  Do not use “would need editing” as a reason to cap at 3 when distract-level interference is not present.
+boundary: 3 vs 4 (also informs 2 vs 3 at the margin)
+risk: May over-score messy but understandable first drafts if applied without checking distract vs do-not-distract.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Conventions scale — interference and control are judged on the student text as written, consistent with platform
+      descriptors; training clarifies first-draft expectations.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-771a68c12a940f29.md
+    link: indirect
+    rubric_excerpts:
+      - code: "30"
+        text: |-
+          Errors in conventions do not distract from communication.
+        highlights: []
+      - code: "40"
+        text: |-
+          Control of conventions is evident.
+        highlights: []
+  training_material:
+    high_level: >-
+      First-draft framing and TD decoupling from EQAO sp9-CV training (opening slides).
+    references: >-
+      data-container/prod/extracted/training-materials/cv-scorer-training-elements.yaml
+    link: indirect
+    training_element_ids:
+      - cv-train-first-draft-reminder
+      - cv-train-td-decoupling
+      - cv-train-page5-control-what-it-looks-like
+      - cv-train-page10-usage-incorrect-examples
+      - cv-train-page11-grammar-pronouns-and-agreement
+      - cv-train-page12-grammar-tense-adverb-article-verbform
+      - cv-train-page13-punctuation-expectations
+      - cv-train-page15-classification-descriptors
+  exemplar_selection:
+    high_level: >-
+      Link exemplars where experts accepted minor mechanics under first-draft conditions once meaning was clear.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/cv/<band>/t<taqr_id>.md
+    link: weak

@@ -1,0 +1,100 @@
+id: h-td-resist-auto-4-when-thin
+description: >
+  Guard against over-scoring at 4 (code 40) when the response has multiple reasons but details are
+  "insufficient and/or vague" per the rubric — which is code 30, not 40. The rubric requires
+  "sufficient supporting details" for code 40. Naming concrete nouns (ice cream, volleyball, eczema)
+  without unpacking why they matter is vague detail, not sufficient detail.
+grounded_in: >
+  OSSLT_Rubric_TD_2025.pdf — code 30 says "insufficient and/or vague supporting details." Code 40
+  says "sufficient supporting details; however, only some are specific." The gap is sufficiency, not
+  presence. Run 049 taqr 429996627 (AI=4, expert=3): model credits "specific, concrete details" but
+  each reason has a single illustration without follow-through. Run 049 taqr 262133789 (AI=4,
+  expert=3): model credits "three distinct reasons each supported by a concrete example" but
+  examples are one-deep per point. Both are code-30 responses that the model over-promoted to code
+  40. Compare/contrast prompts (urban vs rural, climate, etc.): "City has transit and jobs; country
+  has peace and space" with no sentence per side on why those matter to the writer is
+  named-without-unpacking — same insufficiency test.
+consumes:
+  - td-elaboration-quality
+  - td-elaboration-per-move
+  - td-specificity
+  - td-detail-unpack-depth
+decision: |
+  TD: Before confirming 4 (code 40), apply the rubric test for SUFFICIENCY:
+  are the supporting details genuinely sufficient, or merely present?
+  Key distinction from the rubric:
+    Code 30: "insufficient and/or vague supporting details"
+    Code 40: "sufficient supporting details; however, only some are specific"
+  If most points have only one concrete noun or activity named without any
+  sentence explaining WHY it matters, HOW it connects, or WHAT follows from
+  it — that is "vague" detail even if the noun itself is concrete. Score 3.
+  If each point has at least one sentence of real explanation or consequence
+  beyond the label, details are "sufficient" and code 40 applies.
+  Compare/contrast (explicit examples): (1) Parallel claims — "Urban has more
+  opportunities; rural is more relaxing" with no unpacking of impact → treat as
+  insufficient detail (3), not 4. (2) Same structure but each side has one
+  sentence of consequence for the writer's choice → can be sufficient for 4.
+  Use td-detail-unpack-depth: if most moves are "named-only," resist code 40.
+  Guardrail: do not demote to 3 when examples ARE genuinely unpacked with
+  follow-through — this targets the "laundry list of concrete nouns" pattern.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights:
+          - sufficient
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights:
+          - sufficient
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

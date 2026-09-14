@@ -1,0 +1,94 @@
+id: h-td-int003-ceiling-lift-6
+description: |
+  Fixes 5-6 boundary.
+grounded_in: |
+  Intervention 003.
+consumes:
+  - td-elaboration-quality
+  - td-structural-completeness
+  - td-overall-synthesis-strength
+decision: |
+  TD: boundary 5↔6 ONLY.
+
+  PREREQUISITE: ALL body paragraphs must be substantively developed
+  (2+ sentences of reasoning each). If ANY paragraph is thin or
+  relies on listing → cap at 5.
+
+  Score 6 via EITHER pathway:
+  A) Data-driven: numbers/statistics/percentages cited in 2+
+     paragraphs AND causal mechanisms (how X → Y → Z) AND
+     multi-domain coverage.
+  B) Domain depth: specialized knowledge (health, environment,
+     policy, infrastructure) with a progression from general
+     claim → specific evidence → implications across the essay.
+
+  If prerequisite met AND Pathway A or B met → MUST score 6.
+
+  NOTHING ELSE CAN BLOCK BAND 6 when pathways are met:
+  - "Predictable" or "mechanical" structure → irrelevant.
+  - "Lacks nuance" or "lacks trade-offs" → irrelevant.
+  - "Standard list-based structure" → irrelevant.
+  - Ordinal markers (Firstly, Secondly) → scaffolding, not flaws.
+  Do NOT invent additional criteria beyond the pathways above.
+
+  If prerequisite not met OR neither pathway fully met → stay at 5.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights: []
+      - code: "60"
+        text: >-
+          The essay is related to the assigned prompt. A clear and consistent opinion is developed
+          with
+
+          sufficient specific supporting details that are thoughtfully chosen. The content
+          organization is
+
+          coherent and demonstrates a thoughtful progression of ideas.
+        highlights:
+          - progression
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

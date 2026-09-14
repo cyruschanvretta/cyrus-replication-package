@@ -1,0 +1,6 @@
+description: Unpromoted CV heuristics that consume executable linguistic feature packs.
+heuristics:
+  - h-cv-distributed-control-evidence
+  - h-cv-positive-negative-balance
+  - h-linguistic-language-trait-fit-guard
+

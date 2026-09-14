@@ -1,0 +1,23 @@
+id: h-td-conjunctive-linguistic-structure
+description: >-
+  Uses multiple surface-structure observations to focus a TD reread without
+  allowing fluent form, length, or complexity to stand in for developed ideas.
+grounded_in: >-
+  Linguistic feature engineering methods 1, 3, 11, 13, 14, 16, and 17;
+  question-invariant first-principles separation of form from development.
+consumes:
+  - td-linguistic-structure-tool
+decision: >-
+  Treat the feature pack as a navigation aid. If several structure signals
+  point to sparse or repetitive form, inspect whether each claimed reason is
+  actually unpacked through explanation, consequence, example, or comparison.
+  If surface signals look strong, still require those semantic links directly
+  in the response. Never raise or lower TD from length, readability, sentence
+  variety, punctuation, or error counts alone.
+compositor: conjunctive-direct-verification
+boundary: all TD boundaries
+risk: Correlated surface features can create false confidence about idea development.
+sme_traceability:
+  method_source: docs/guides/ai-scoring-linguistic-feature-engineering
+  promotion_status: unpromoted-experiment-only
+

@@ -1,0 +1,84 @@
+id: h-cv-thorough-not-4-when-heavy-errors
+description: >
+  When scoring **CV** only: **thorough (4)** requires errors **not** to impede meaning — if the
+  error rate is **high** (many sentences affected) or patterns break control, do **not** award 4
+  even when the reader can eventually recover meaning.
+grounded_in: |
+  Separates “clear enough after effort” from true thorough control; targets AI=4 / expert=3.
+consumes:
+  - cv-error-band
+  - cv-sentence-variety
+  - cv-meaning-flow
+decision: >
+  CV: If error_band is “heavy” OR sentence_variety is frequently broken, cap at 3 even when
+
+  meaning_flow is not “opaque.” Thorough means sustained control, not “understandable despite
+
+  noise.” If only occasional slips and meaning_flow is clear throughout, this heuristic does not
+  apply.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the official Conventions (WR-EXT / OSSLT) scale—how errors affect readability, not
+      Topic Development.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-771a68c12a940f29.md
+
+      Band text for codes affecting meaning vs. thoroughness when the response is clean.
+    link: direct
+    rubric_excerpts:
+      - code: "30"
+        text: |-
+          Errors in conventions do not distract from
+          communication.
+        highlights: []
+      - code: "40"
+        text: |-
+          Control of conventions is evident.
+
+          homophones, end punctuation, the apostrophe and quotation marks. A few
+          errors may exist.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Conventions scorer training (wi-1130-sp9-CV.md; “LW: Warm Place (CV)”, sp9-CV, window
+      1130). Calibrate with the rubric slides, annotated Anchors by code, and unannotated Training
+      Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      conventions teaching slides / error types (≈pp. 5–14); Conventions rubric code grid (≈pp.
+      12–15); “Anchors” section (p. 16); annotated exemplars by code (e.g. Code 10 anchors ≈pp.
+      24–27); “Training Responses” (from ≈p. 43).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1130-sp9-CV.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1132-sp9-CV.md,
+      data-container/prod/extracted/training-materials/guides/wi-1134-sp9-CV.md,
+      data-container/prod/extracted/training-materials/guides/wi-1136-sp9-CV.md, …
+    link: indirect
+    training_element_ids:
+      - cv-train-first-draft-reminder
+      - cv-train-td-decoupling
+      - cv-train-page5-control-what-it-looks-like
+      - cv-train-page6-sentence-structure-syntax
+      - cv-train-page7-common-errors-runon-comma-fragments
+      - cv-train-page8-spelling-scoring-reminders
+      - cv-train-page9-spelling-commonly-misspelled
+      - cv-train-page10-usage-incorrect-examples
+      - cv-train-page11-grammar-pronouns-and-agreement
+      - cv-train-page12-grammar-tense-adverb-article-verbform
+      - cv-train-page13-punctuation-expectations
+      - cv-train-page15-classification-descriptors
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/cv/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

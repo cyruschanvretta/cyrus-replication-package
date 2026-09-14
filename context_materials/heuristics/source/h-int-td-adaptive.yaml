@@ -1,0 +1,218 @@
+id: h-int-td-adaptive
+kind: interrogation_bundle
+title: Adaptive TD Interrogation — Triage → Band-Appropriate Probing
+description: >-
+  Fixes the catastrophic over-scoring observed in run 074, where the peel-the-onion chain (designed
+  for 4↔5) inflated Band-1 and Band-2 responses to 4–5. This chain starts with a triage step that
+  estimates the band range, then asks probing questions calibrated to that range. Rubric band
+  descriptors are injected into the system prompt so the model has low-end anchors at all times.
+rationale: >-
+  Run 074 showed that applying a specificity-focused interrogation to all responses inflates
+  low-band scores because the probing questions force the model to find structure where none
+  belongs. The fix is triage-first: estimate the band range, then probe for the actual boundary in
+  play.
+interrogation_system: >-
+  You are an expert OSSLT writing assessor performing a structured analysis of a student's extended
+  response for **Topic Development (TD)**.
+
+  You must hold the following rubric in mind at every step — do NOT deviate from these band
+  definitions:
+
+  **Band 1 (Insufficient):** The essay is related to the prompt but does not express an opinion. OR
+  the essay expresses an opinion with ideas but no supporting details, or it provides details
+  unrelated to the opinion. There is no evidence of content organization.
+
+  **Band 2 (Limited):** The essay is related to the prompt, but only part of the response expresses
+  and supports an opinion. OR the opinion is unclear or inconsistent. The connection between ideas/
+  details and the opinion is not always evident. There are insufficient supporting details: too few
+  or repetitious. There is limited evidence of content organization.
+
+  **Band 3 (Adequate):** The essay is related to the prompt and expresses a clear opinion. There are
+  insufficient and/or vague supporting details or the connection of the details to the opinion is
+  not always clear. There is evidence of content organization, but lapses distract from the overall
+  communication.
+
+  **Band 4 (Thorough):** The essay is related to the prompt. A clear and consistent opinion is
+  developed with sufficient supporting details; however, only some are specific. The content
+  organization is mechanical, and any lapses do not distract from the overall communication.
+
+  **Band 5 (Strong):** The essay is related to the prompt. A clear and consistent opinion is
+  developed with sufficient specific supporting details. The content organization is logical.
+
+  **Band 6 (Exemplary):** The essay is related to the prompt. A clear and consistent opinion is
+  developed with sufficient specific supporting details that are thoughtfully chosen. The content
+  organization is coherent and demonstrates a thoughtful progression of ideas.
+
+  **Key boundary cues:** - 1↔2: Does the response express AND support an opinion at all? - 2↔3: Is
+  the opinion clear? Are supporting details more than "too few or repetitious"? - 3↔4: Are
+  supporting details sufficient (not vague)? Do organizational lapses distract? - 4↔5: Are
+  supporting details consistently specific (not "only some")? Is organization logical
+    rather than mechanical?
+  - 5↔6: Are details thoughtfully chosen? Is organization coherent with thoughtful progression?
+
+  **Scoring discipline:** Evaluate TD separately from Conventions. NEVER lower TD because of
+  spelling, grammar, or simple sentences. A response with many spelling errors but strong
+  argumentation and specific details can still be Band 5 or 6.
+
+  Answer each question thoroughly, quoting directly from the student text when possible. Do not
+  assign a score until explicitly asked.
+target_boundary: all (adaptive)
+grounded_in_taqr_ids:
+  - 170184440
+  - 429096017
+  - 430254766
+  - 435525267
+steps:
+  - id: triage
+    purpose: >-
+      Estimate the band range BEFORE any deep probing. This prevents the magnifying-glass-on-nothing
+      failure where specificity probing inflates thin responses.
+    question: >-
+      Read the student response carefully. Using the rubric bands above, estimate which band range
+      this response falls into: **low (1–2)**, **mid (3–4)**, or **high (5–6)**. Do NOT assign a
+      precise score yet.
+
+      To decide: - If the response does not express an opinion, or expresses one with no supporting
+      details or
+        only unrelated details → **low (1–2)**.
+      - If the response has a clear opinion but supporting details are vague, insufficient, or only
+        partly connected → **mid (3–4)**.
+      - If the response has a clear opinion with sufficient specific supporting details and logical
+        or better organization → **high (5–6)**.
+
+      State your estimate (low / mid / high) and the single most important reason.
+  - id: content-sufficiency
+    purpose: >-
+      For all band ranges, establish the factual baseline: what is actually in the text. Calibrate
+      expectations to the triage estimate — do not over-dignify thin content.
+    question: >-
+      Based on your triage estimate, answer the appropriate question:
+
+      **If you estimated LOW (1–2):** Does the student express an opinion at all? If yes, quote it.
+      Then: are there ANY supporting details? List each one. Are they related to the opinion or
+      unrelated? Is there any evidence of content organization (paragraphs, logical grouping)?
+
+      **If you estimated MID (3–4):** Quote the student's opinion. Then list each supporting detail.
+      For each, state whether it is **specific** (names a particular thing, place, consequence,
+      mechanism) or **vague** (generic category, abstract assertion). Is there content organization?
+      Do any lapses distract from communication?
+
+      **If you estimated HIGH (5–6):** Quote the student's opinion. List each specific supporting
+      detail and note whether it is **thoughtfully chosen** (adds a unique angle, deepens the
+      argument) or merely **adequate** (relevant but predictable). Is the organization logical or
+      does it show thoughtful progression?
+  - id: boundary-discrimination
+    purpose: >-
+      Pinpoint which boundary within the triage range the response sits on. Each band range has one
+      key boundary to resolve.
+    question: >-
+      Now discriminate within your estimated band range. Answer the question that matches:
+
+      **If LOW (1 vs 2):** Band 1 means NO opinion OR opinion with NO supporting details (or only
+      unrelated ones) AND no content organization. Band 2 means SOME attempt at supporting an
+      opinion, even if unclear or insufficient. Which is it? Quote the evidence that decides.
+
+      **If MID (3 vs 4):** Band 3 means the opinion is clear but details are insufficient/vague OR
+      not clearly connected, AND organizational lapses distract. Band 4 means sufficient details
+      (some specific), clear opinion, mechanical but non-distracting organization. The key
+      discriminator: are the supporting details **sufficient** or **insufficient**? Do
+      organizational lapses **distract** or not? Quote the evidence that decides.
+
+      **If HIGH (5 vs 6):** Band 5 means consistently specific details and logical organization.
+      Band 6 means details are **thoughtfully chosen** (not just specific — they add depth,
+      surprise, or nuance) and organization is **coherent with thoughtful progression**. The key
+      discriminator: are the details merely specific, or are they also thoughtfully selected? Quote
+      the evidence that decides.
+  - id: cross-check
+    purpose: >-
+      Guard against triage errors. Force the model to consider whether its analysis actually
+      supports a different band range than initially estimated.
+    question: >-
+      Before finalizing: review your content-sufficiency analysis and boundary discrimination. Is
+      there any reason your initial triage estimate was wrong? Specifically:
+
+      - If you said LOW: did you find enough supporting details that the response might actually be
+        MID? (Be honest — listing concrete nouns without explaining why they matter is NOT sufficient
+        detail.)
+      - If you said MID: is the opinion actually unclear or are the details actually so vague that
+        it should be LOW? Or are the details actually consistently specific enough for HIGH?
+      - If you said HIGH: on re-examination, are some of the "specific" details actually generic
+        categories (e.g. "sports" vs "the basketball tournament last March")? Could this be MID?
+
+      State whether you are **confirming** or **revising** your estimate, and why.
+  - id: verdict
+    purpose: Explicit band assignment with rubric citation before the JSON step
+    question: >-
+      Based on all your analysis — triage, content audit, boundary discrimination, and cross-check —
+      assign the **exact band (1–6)** for this response. State: 1. The band number. 2. The one
+      rubric phrase that most applies (quote from the rubric above). 3. The single strongest piece
+      of evidence from the student text.
+  - id: holistic_score
+    purpose: Canonical numeric score for exact-agreement check against expert
+    question: >-
+      Using ONLY your analysis above (do not re-score from a fresh skim), assign the holistic Topic
+      Development score for this response on the 1–6 scale. The JSON score MUST match your verdict —
+      if your verdict said Band 3, the score must be 3. Respond ONLY with valid JSON, no markdown
+      fences: {"score": <integer 1-6>, "rationale": "<one short line>"}
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights: []
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck. Interrogation flow: this run’s
+      config-snapshot/chain-flows/*.json.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+
+      Interrogation: config-snapshot/chain-flows/*.json (not under extracted/).
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

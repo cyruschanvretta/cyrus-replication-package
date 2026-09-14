@@ -1,0 +1,23 @@
+id: h-cv-distributed-control-evidence
+description: >-
+  Combines negative flags, their sentence distribution, positive error-free
+  coverage, and direct reader impact instead of using any one error count.
+grounded_in: >-
+  Linguistic feature engineering methods 6-11, 13, 16, and 17; CV first-draft
+  framing and the existing reader-impact heuristics.
+consumes:
+  - cv-linguistic-control-tool
+decision: >-
+  First inspect the response for rereading burden and loss of meaning. Then use
+  the pack conjunctively: distinguish isolated from distributed flags, compare
+  error-bearing with error-free sentences, and check whether boundary,
+  grammar, spelling, and punctuation evidence agree. A high count with low
+  impact is not automatically weak control; a low count that misses a severe
+  construction is not automatically strong control.
+compositor: reader-impact-and-distribution-conjunction
+boundary: all CV boundaries
+risk: Several measurements share the same LanguageTool source and are not statistically independent.
+sme_traceability:
+  method_source: docs/guides/ai-scoring-linguistic-feature-engineering
+  promotion_status: unpromoted-experiment-only
+

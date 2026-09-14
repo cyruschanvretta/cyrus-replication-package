@@ -1,0 +1,54 @@
+id: h-cv-rhythm-threshold
+description: >-
+  Corrects the error where the model awards a 3 to responses with broken syntax (fragments/run-ons) simply because the
+  meaning is recoverable. It forces the model to check if the errors disrupt the 'reading rhythm' or require
+  're-reading', which are the hallmarks of Band 2.
+grounded_in: >-
+  Grounded in taqr_ids: 440838985, 166444072, 180275661
+
+  440838985: Model ignored S-V agreement/tense errors that justify a 2; 166444072: Model ignored lowercase 'i' and comma
+  splices that justify a 2; 180275661: Model ignored fragments/run-ons that justify a 2.
+consumes:
+  - cv-rhythm-disruption
+  - cv-meaning-flow
+decision: >-
+  Evaluate the impact of errors on the reading experience. A score of 3 requires that the reader does NOT need to
+  re-read sentences to grasp the meaning. 
+
+
+  If `cv-rhythm-disruption` indicates frequent fragments, run-on sentences, or heavy comma splices that create a
+  'choppy' or 'interrupted' reading rhythm, you MUST assign a 2, even if `cv-meaning-flow` is 'clear'. 
+
+
+  Do NOT award a 3 just because 'the meaning is clear' or 'the student's idea is understandable'. If the mechanical
+  errors (syntax/punctuation) force the reader to reconstruct the sentence or struggle with the flow, the response is
+  'Limited' (2).
+
+
+  Example: A response with a clear idea but a sentence that starts with 'Because...' and ends without a proper clause
+  (fragment) should be a 2. A response with many typos but smooth sentence boundaries should be a 3.
+boundary: 2 vs 3
+risk: Could under-score very clear but simple writing as 2.
+sme_traceability:
+  training_material:
+    high_level: >-
+      EQAO Conventions (sp9-CV) scorer training — reading rhythm and re-reading align with sentence-structure
+      guidance in the guide.
+    references: >-
+      data-container/prod/extracted/training-materials/guides/wi-1130-sp9-CV.md (sibling windows 1132, 1134, 1136).
+
+      Canonical excerpts: data-container/prod/extracted/training-materials/cv-scorer-training-elements.yaml
+    link: indirect
+    training_element_ids:
+      - cv-train-first-draft-reminder
+      - cv-train-td-decoupling
+      - cv-train-page5-control-what-it-looks-like
+      - cv-train-page6-sentence-structure-syntax
+      - cv-train-page7-common-errors-runon-comma-fragments
+      - cv-train-page8-spelling-scoring-reminders
+      - cv-train-page9-spelling-commonly-misspelled
+      - cv-train-page10-usage-incorrect-examples
+      - cv-train-page11-grammar-pronouns-and-agreement
+      - cv-train-page12-grammar-tense-adverb-article-verbform
+      - cv-train-page13-punctuation-expectations
+      - cv-train-page15-classification-descriptors

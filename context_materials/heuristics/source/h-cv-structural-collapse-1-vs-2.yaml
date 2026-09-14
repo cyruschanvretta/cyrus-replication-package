@@ -1,0 +1,57 @@
+id: h-cv-structural-collapse-1-vs-2
+description: >-
+  Corrects the error where the model awards Band 2 to texts that are essentially unpunctuated blocks. In the 1 vs 2
+  boundary, the presence of an 'understandable idea' does not override the absence of sentence boundaries. If the text
+  lacks terminal punctuation or capitalization to signal new sentences, it must be scored as 1.
+grounded_in: >-
+  Grounded in taqr_ids: 180461063, 428601388, 161831178
+
+  For 180461063, the model ignored the lack of sentence boundaries; for 428601388, it ignored the run-on/comma splice
+  density; for 161831178, it ignored the lack of basic punctuation.
+consumes:
+  - cv-boundary-collapse
+  - cv-meaning-flow
+decision: >-
+  Evaluate the structural integrity of the text. If the response consists of a single, continuous run-on sentence or a
+  series of phrases lacking terminal punctuation (periods) and capitalization at the start of new segments, you MUST
+  assign a score of 1. 
+
+
+  Do not allow the 'understandability' of the student's idea to pull the score up to 2. The distinction between 1 and 2
+  is not 'can I understand it?' but 'does the student demonstrate any control over sentence boundaries?'. 
+
+
+  Test: Count the number of periods/end-marks. If the number of end-marks is zero or significantly lower than the number
+  of distinct ideas presented, the text is structurally collapsed. 
+
+
+  Example: 'i like dogs they are fun' (Score 1). 'I like dogs. They are fun.' (Score 2+). 
+
+
+  Guardrail: If the text is a single, short, well-formed sentence, do not penalize it; only penalize when the lack of
+  boundaries creates a 'run-on' effect.
+boundary: 1 vs 2
+risk: Could over-penalize very short, clean sentences that are simply brief.
+sme_traceability:
+  training_material:
+    high_level: >-
+      EQAO Conventions (sp9-CV) scorer training — sentence-boundary / structure errors that force re-reading
+      support the 1 vs 2 structural collapse boundary.
+    references: >-
+      data-container/prod/extracted/training-materials/guides/wi-1130-sp9-CV.md (sibling windows 1132, 1134, 1136).
+
+      Canonical excerpts: data-container/prod/extracted/training-materials/cv-scorer-training-elements.yaml
+    link: indirect
+    training_element_ids:
+      - cv-train-first-draft-reminder
+      - cv-train-td-decoupling
+      - cv-train-page5-control-what-it-looks-like
+      - cv-train-page6-sentence-structure-syntax
+      - cv-train-page7-common-errors-runon-comma-fragments
+      - cv-train-page8-spelling-scoring-reminders
+      - cv-train-page9-spelling-commonly-misspelled
+      - cv-train-page10-usage-incorrect-examples
+      - cv-train-page11-grammar-pronouns-and-agreement
+      - cv-train-page12-grammar-tense-adverb-article-verbform
+      - cv-train-page13-punctuation-expectations
+      - cv-train-page15-classification-descriptors

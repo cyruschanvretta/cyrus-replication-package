@@ -1,0 +1,5 @@
+description: Heuristics for OR (reading / selection-based) strand runs only.
+heuristics:
+  - h-or-evidence-from-selection
+  - h-or-organizational-signal
+  - h-or-relevant-detail-density

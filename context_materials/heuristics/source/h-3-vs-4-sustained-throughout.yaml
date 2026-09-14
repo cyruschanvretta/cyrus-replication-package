@@ -1,0 +1,120 @@
+id: h-3-vs-4-sustained-throughout
+description: >
+  Prefer 4 over 3 when multiple points are not only present but developed with sustained attention —
+  revisited details, weighing, or an integrative sentence — across most of the response.
+grounded_in: >
+  WR-EXT-12 TD descriptor_4 (sustained, specific, well-elaborated support) from extracted item-type
+  rubric JSON; heuristic decision logic is not copied from platform PDFs.
+consumes:
+  - td-overall-synthesis-strength
+  - td-elaboration-per-move
+  - td-staged-reasoning
+decision: |
+  If elaboration_per_move shows sustained on two or more moves OR synthesis is
+  moderate-or-strong with multiple axes from td-multi-axis-argument, consider 4.
+  Reserve 3 for competent but patchy development or synthesis that drops mid-response.
+research_justification:
+  item_family: WR-EXT-12
+  item_type_rubric_title: Extended writing — topic development & conventions (Gr. 12)
+  rubric_sources:
+    - repo_path: data-container/prod/extracted/item-type-rubrics/writing-extended-12.json
+      kind: item_type_rubric_json
+      note: Official scale labels 1–4 and TD/CV construct descriptors for WR-EXT-12.
+      td_descriptor_4: Sustained, specific, well-elaborated support tied to the prompt.
+      td_descriptor_1: Minimal or irrelevant development; little meaningful support.
+      scale_labels:
+        - 1 — Insufficient
+        - 2 — Limited
+        - 3 — Adequate
+        - 4 — Thorough
+    - repo_path: data-container/prod/inferred/contextual-materials/rubric-td.md
+      kind: scoring_context_td
+      note: Verbatim TD construct from writing-extended-12.json (bands 1 and 4 only in the extract).
+      excerpt: >-
+        # WR-EXT-12 — Topic Development (TD)
+
+        **Source:** `extracted/item-type-rubrics/writing-extended-12.json` (construct `TD`).
+
+        **Scale:** 1 — Insufficient – 2 — Limited – 3 — Adequate – 4 — Thorough
+
+        Only **band 1** and **band 4** descriptor text appear in the curated extract; bands 2–3 are
+        named on the scale only.
+
+        - **4 — Thorough:** Sustained, specific, well-elaborated support tied to the prompt. - **1 —
+        Insufficient:** Minimal or irrelevant development; little meaningful support.
+  training_sources: []
+  boundary_sources: []
+  training_index_sources:
+    - repo_path: data-container/prod/extracted/range-finding-sets/sets.json
+      kind: training_sets_index
+      note: >-
+        Platform training-set membership by window_item_id and taqr_id — use to trace items to
+        validity sets (no student text in this JSON). For scorer anchors and guides, see
+        extracted/training-materials/.
+  summary: >-
+    Maps the heuristic to WR-EXT TD: band 4 requires sustained, well-elaborated support per
+    writing-extended-12.json. Rubric JSON TD descriptor_4: Sustained, specific, well-elaborated
+    support tied to the prompt.
+  generated_at: "2026-04-12T00:00:00.000Z"
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "30"
+        text: >-
+          The essay is related to the prompt and expresses a clear opinion. There are insufficient
+          and/or
+
+          vague supporting details or the connection of the details to the opinion is not always
+          clear. There is
+
+          evidence of content organization, but lapses distract from the overall communication
+        highlights: []
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

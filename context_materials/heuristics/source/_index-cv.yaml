@@ -1,0 +1,20 @@
+description: >
+  Heuristics for Conventions (CV) strand runs only.
+  Each rule may list training_element_ids under sme_traceability.training_material;
+  verbatim text resolves from contextual cv-training-elements.yaml (extracted registry).
+heuristics:
+  - h-cv-meaning-impaired-first
+  - h-cv-thorough-when-clean
+  - h-cv-limited-when-fragments
+  - h-cv-prefer-4-when-meaning-clear
+  - h-cv-thorough-not-4-when-heavy-errors
+  - h-cv-adequate-clear-but-flawed
+  - h-cv-rhythm-threshold
+  - h-cv-error-tolerance
+  - h-cv-structural-collapse-1-vs-2
+  - h-cv-systemic-penalty-2-vs-3
+  - h-cv-first-draft-calibration
+  - h-cv-meaning-impact-not-error-tally
+  - h-cv-spelling-same-word-count-once
+  - h-cv-spelling-not-sole-conventions-driver
+  - h-cv-syntax-patterns-interfere-reading

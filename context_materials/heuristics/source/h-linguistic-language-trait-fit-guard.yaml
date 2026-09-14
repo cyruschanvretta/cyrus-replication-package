@@ -1,0 +1,22 @@
+id: h-linguistic-language-trait-fit-guard
+description: >-
+  Enforces distinct TD/CV grouping and distinct English/French normalization
+  before fit-time linguistic labels can enter a scoring context.
+grounded_in: >-
+  Linguistic feature engineering methods 18-21 and documented French/English
+  differences in dependency, phrasal elaboration, clauses, and readability.
+consumes:
+  - shared-linguistic-ensemble-tool
+decision: >-
+  Reject a fitted profile unless its training manifest proves disjointness from
+  dev-60 and protected level-2 responses, identifies one language and one
+  trait, and records feature means, standard deviations, cut points, registry
+  version, and cohort hash. Never compare raw English and French values or
+  share TD and CV dimension groups merely because feature names match.
+compositor: preflight-validity-gate
+boundary: none
+risk: A valid-looking label can encode cohort leakage or incompatible language definitions.
+sme_traceability:
+  method_source: docs/guides/ai-scoring-linguistic-feature-engineering
+  promotion_status: unpromoted-experiment-only
+

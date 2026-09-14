@@ -1,0 +1,137 @@
+id: h-int-td-causal-scaffold
+kind: interrogation_bundle
+title: Causal Scaffold — Development Through Consequence
+description: >-
+  When a student writes about abstract topics (leadership, character traits), the model struggles to
+  see 'development' because there are few physical objects to point at. This chain reframes
+  'specificity' as argumentative development: scenarios with consequences, conditionals, and if-then
+  reasoning. It asks the model to map the student's reasoning architecture before judging quality.
+rationale: >-
+  When a student writes about abstract topics (leadership, character traits), the model struggles to
+  see 'development' because there are few physical objects to point at. This chain reframes
+  'specificity' as argumentative development: scenarios with consequences, conditionals, and if-then
+  reasoning. It asks the model to map the student's reasoning architecture before judging quality.
+interrogation_system: >-
+  You are an expert writing assessor performing a structural analysis of argumentation in a student
+  response. Focus on the logical architecture — the scaffolding of claims, scenarios, and
+  consequences — rather than surface features like vocabulary or transitions. Answer each question
+  thoroughly with direct quotes.
+target_boundary: 4 vs 5
+grounded_in_taqr_ids:
+  - 428605804
+steps:
+  - id: claim-map
+    purpose: Map the argument's skeleton before evaluating development
+    question: >-
+      Read the student response. Identify every distinct CLAIM the student makes (a quality, trait,
+      or assertion). For each claim, quote the sentence(s) where it is introduced. How many distinct
+      claims are there?
+  - id: scenario-inventory
+    purpose: Distinguish restated assertions from genuine illustrative development
+    question: >-
+      For each claim you identified, does the student construct a SCENARIO — a situation, example,
+      or hypothetical that illustrates the claim in action? Quote each scenario. Note whether each
+      is: (a) a generic/abstract restatement, (b) a specific-but-brief example, or (c) a developed
+      scenario with actors, actions, and outcomes.
+  - id: consequence-chains
+    purpose: >-
+      Consequence chains are the clearest evidence of development in abstract-topic writing —
+      they're what separates explaining from merely asserting
+    question: >-
+      Now focus on consequences. For each scenario, does the student trace what HAPPENS as a result?
+      Look for: 'if they fail to...', 'as a result...', 'this would lead to...', 'without this...'.
+      Quote every consequence chain. How many of the student's claims have a consequence attached?
+  - id: abstraction-ladder
+    purpose: >-
+      Two-directional abstraction movement (general → specific → general) is a hallmark of developed
+      argumentation that mechanical structure metrics miss entirely
+    question: >-
+      Consider the abstraction level of the student's writing. Does the student ever move DOWN the
+      abstraction ladder — from a general quality (e.g. 'responsibility') to a concrete
+      instantiation (e.g. 'ensuring club applications are submitted on time')? List every instance
+      of downward movement. Then: does the student ever move back UP — connecting the specific back
+      to the general? Quote examples of both directions.
+  - id: development-density
+    purpose: >-
+      Quantify development density to determine whether the response sustains its quality or
+      front-loads it
+    question: >-
+      Count the total reasoning moves in this response: claims, scenarios, consequences, abstraction
+      shifts. Now divide by the number of major argument sections. What is the average density of
+      development per section? Is any section significantly thinner than the others?
+  - id: verdict
+    purpose: >-
+      Verdict grounded in argumentative architecture rather than surface-level transition word
+      counting
+    question: >-
+      Based on your analysis of causal chains, scenario development, abstraction movement, and
+      density: does this response demonstrate the 'specific and developed' quality required for Band
+      5, or does it remain at the 'sufficient detail' level of Band 4? What is the decisive factor?
+  - id: holistic_score
+    purpose: Canonical numeric score for exact-agreement check against expert
+    question: >-
+      Using ONLY your analysis above (do not re-score from a fresh skim), assign the holistic Topic
+      Development score for this response on the 1–6 scale used in the assessment. Respond ONLY with
+      valid JSON, no markdown fences: {"score": <integer 1-6>, "rationale": "<one short line>"}
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights: []
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck. Interrogation flow: this run’s
+      config-snapshot/chain-flows/*.json.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+
+      Interrogation: config-snapshot/chain-flows/*.json (not under extracted/).
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

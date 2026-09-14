@@ -1,0 +1,94 @@
+id: h-td-consequence-vs-label-audit
+description: >-
+  Corrects the error where the model awards a 4 or 5 simply because specific nouns (e.g., 'hockey
+  captain', 'military') are present. The model must verify if these nouns are 'anchors' for a
+  consequence or merely 'labels' in a list. If a noun is present but lacks an associated
+  'consequence' or 'impact' verb, it must be treated as a 'laundry list' item (Band 2/3) rather than
+  'sufficient development' (Band 4/5).
+grounded_in: >-
+  Grounded in taqr_ids: 429096017, 280316917
+
+  429096017: Model over-weighted 'military' and 'hockey' as evidence of 4, but they were just
+  labels; 280316917: Model over-weighted 'golf' and 'accidents' as 4, but they lacked sufficient
+  depth.
+consumes:
+  - td-detail-unpack-depth
+  - td-laundry-list-detection
+  - td-consequence-linkage-density
+decision: >-
+  Before assigning a 4 (code 40), perform a 'Consequence Audit' on all identified concrete nouns in
+  `td-detail-unpack-depth`. 
+
+
+  For every noun (e.g., 'military officer', 'golf', 'traffic accidents'), check if the student
+  provides a 'consequence' or 'impact' (e.g., 'leads to', 'results in', 'allows for'). 
+
+
+  If the student merely names the noun and moves to the next point (e.g., 'A leader is like a
+  military officer. Also, a leader is like a hockey captain.'), you MUST cap the score at 3. The
+  presence of specific nouns is NOT sufficient for a 4 if they are not 'anchated' to a consequence.
+
+
+  DO NOT apply this if the student provides even a single sentence of 'why' or 'how' for that
+  specific noun. If the link exists, the detail is 'sufficient'.
+boundary: 3 vs 4
+risk: Could under-score responses that have high specificity but low consequence-density.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights: []
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

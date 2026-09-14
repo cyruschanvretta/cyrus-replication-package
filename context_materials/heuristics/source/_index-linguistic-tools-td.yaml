@@ -1,0 +1,5 @@
+description: Unpromoted TD heuristics that consume executable linguistic feature packs.
+heuristics:
+  - h-td-conjunctive-linguistic-structure
+  - h-linguistic-language-trait-fit-guard
+

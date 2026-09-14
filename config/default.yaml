@@ -1,0 +1,82 @@
+schema_version: 1
+seed: 20260913
+
+model:
+  recommended_family: gemma-3-12b-it
+  adapter: ollama
+  temperature: 0
+  max_tokens: 80
+  timeout_seconds: 120
+  concurrency: 12
+  retries: 4
+  sagemaker:
+    endpoint_name_env: AWE_SAGEMAKER_ENDPOINT
+    region_env: AWS_REGION
+    payload_mode: messages
+    content_type: application/json
+    accept: application/json
+  http:
+    url_env: AWE_MODEL_URL
+    token_env: AWE_MODEL_TOKEN
+    payload_mode: messages
+  ollama:
+    url_env: AWE_OLLAMA_URL
+    model_env: AWE_OLLAMA_MODEL
+    url: http://127.0.0.1:11434
+    model: gemma3:12b
+    think: false
+  callable:
+    target: null
+
+deterministic:
+  # "provided" is required for evidence-equivalent replication. "portable"
+  # computes a smaller, transparent feature set for integration/new training.
+  mode: portable
+  prefer_provided: true
+
+evaluation:
+  save_full_fit_models: true
+  bootstrap_samples: 10000
+
+routes:
+  english-td:
+    language: en
+    skill: TD
+    uses_llm: false
+    feature_view: deterministic
+    learner: random_forest_depth4
+    repeats: 5
+    folds: 10
+    expected_frozen_feature_count: 132
+  english-cv:
+    language: en
+    skill: CV
+    uses_llm: true
+    omit_task_prompt: true
+    profile: cv_reader_work_v1
+    feature_view: combined
+    learner: tree_ordinal_median
+    repeats: 3
+    folds: 5
+    expected_frozen_feature_count: 304
+  french-td:
+    language: fr
+    skill: TD
+    uses_llm: true
+    omit_task_prompt: false
+    profile: td_support_inventory_v1
+    feature_view: combined
+    learner: tree_ordinal_expected
+    repeats: 5
+    folds: 10
+    expected_frozen_feature_count: 240
+    validation_note: Gemma 3 12B is the package default but has not yet been validated in this quadrant.
+  french-cv:
+    language: fr
+    skill: CV
+    uses_llm: false
+    feature_view: deterministic
+    learner: cumulative_ordinal_median_c003
+    repeats: 5
+    folds: 10
+    expected_frozen_feature_count: 261

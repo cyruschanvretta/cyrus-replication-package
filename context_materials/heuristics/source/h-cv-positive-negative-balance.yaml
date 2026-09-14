@@ -1,0 +1,21 @@
+id: h-cv-positive-negative-balance
+description: >-
+  Prevents an error-only prompt from overlooking sustained correct control by
+  pairing each negative measure with a positive complement where available.
+grounded_in: >-
+  Linguistic feature engineering method 17 and ensemble-aggregation guidance.
+consumes:
+  - cv-linguistic-control-tool
+decision: >-
+  Read positive and negative evidence together. Compare missing-boundary rate
+  with terminal-punctuation control, casing flags with sentence-initial
+  control, and total errors with error-free sentence coverage. Treat a
+  contradiction as a reason to inspect locations, not as permission to average
+  the measurements into a score.
+compositor: paired-positive-negative-audit
+boundary: 2 vs 3 and 3 vs 4
+risk: Positive complements can be algebraically redundant and must not be counted as independent votes.
+sme_traceability:
+  method_source: docs/guides/ai-scoring-linguistic-feature-engineering
+  promotion_status: unpromoted-experiment-only
+

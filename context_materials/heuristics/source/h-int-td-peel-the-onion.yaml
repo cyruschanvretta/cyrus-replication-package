@@ -1,0 +1,146 @@
+id: h-int-td-peel-the-onion
+kind: interrogation_bundle
+title: Peel the Onion — Specificity Audit
+description: >-
+  The model often caps at 4 because it sees mechanical transitions (First, Second, Lastly) and
+  concludes the organization is 'enumerative.' This chain systematically strips away structural
+  noise and forces the model to confront the actual density of specific, concrete detail in each
+  argument axis — the real criterion for Band 5.
+rationale: >-
+  The model often caps at 4 because it sees mechanical transitions (First, Second, Lastly) and
+  concludes the organization is 'enumerative.' This chain systematically strips away structural
+  noise and forces the model to confront the actual density of specific, concrete detail in each
+  argument axis — the real criterion for Band 5.
+interrogation_system: >-
+  You are an expert writing assessor performing a structured analysis of a student's extended
+  response. You are NOT scoring yet. You are investigating the response through a sequence of
+  focused questions. Answer each question thoroughly, quoting directly from the student text when
+  possible. Do not assign a score until explicitly asked.
+target_boundary: 4 vs 5
+grounded_in_taqr_ids:
+  - 170184440
+steps:
+  - id: thesis-extraction
+    purpose: >-
+      Ground the analysis — establish whether the response has a coherent through-line before
+      examining detail quality
+    question: >-
+      Read the student response carefully. In one sentence, state the student's central claim or
+      thesis. Then: does the student return to this thesis, or does the response drift?
+  - id: evidence-inventory
+    purpose: >-
+      Force exhaustive enumeration of specifics — the model's single-pass scoring often undercounts
+      these
+    question: >-
+      Now list every concrete, specific detail the student provides. I mean: named entities, dollar
+      amounts, physical sensations, named consequences, specific mechanisms. Quote each one directly
+      from the text. Organize them by which paragraph or argument axis they belong to.
+  - id: causal-chain-trace
+    purpose: >-
+      Distinguish between a laundry list of specifics (Band 3-4) and specifics woven into reasoning
+      chains (Band 5)
+    question: >-
+      For each specific detail you just quoted, answer: does the student explain WHY it matters or
+      HOW it connects to their thesis? Trace the causal chain for each. Use the format: [Detail] →
+      [Because/So/Which means] → [Consequence or connection to thesis]. Mark any detail that is
+      'orphaned' — specific but never linked back.
+  - id: structure-blind-read
+    purpose: Decouple structural scaffolding from content quality — the core confusion at the 4→5 boundary
+    question: >-
+      Now perform this experiment: mentally delete every transition marker in the response (First,
+      Second, Lastly, In conclusion, etc.). Read what remains as if the paragraphs were unlabeled.
+      How many distinct, independently developed arguments do you find? Is each one developed beyond
+      a single assertion?
+  - id: sustained-specificity-test
+    purpose: >-
+      Prevent false Band 4: do not treat 'third paragraph shorter' as missing sustained specificity
+      when all axes still have concrete + linked detail
+    question: >-
+      Band 5 requires **sustained** support: each major reason must be developed with concrete
+      detail and at least one reasoning link to the thesis — it does **not** require every paragraph
+      to be equally long or equally dense. A slightly shorter third axis still counts as sustained
+      if it is not vague: it must name concrete particulars (e.g. clothing, sensations, costs) and
+      connect them to the preference. Looking at your evidence inventory: does **each** major
+      argument axis have at least one concrete anchor plus a causal or consequence link? If yes,
+      sustained support is present even if one axis is briefer than another.
+  - id: verdict
+    purpose: >-
+      Final triangulated verdict; guard against over-weighting mechanical structure or
+      paragraph-length parity
+    question: >-
+      Given everything you've found: the causal chains, the structure-blind argument count, and the
+      sustained specificity test — **where does this response sit on the 4-vs-5 boundary?** If each
+      major axis has concrete detail plus a reasoning link to the thesis (even if one axis is
+      slightly shorter), do **not** assign Band 4 solely because of ordinal transitions or uneven
+      paragraph length. State Band 4 only if at least one axis is genuinely vague or lacks concrete
+      development. State your judgment and the single strongest piece of evidence.
+  - id: holistic_score
+    purpose: Canonical numeric score for exact-agreement check against expert
+    question: >-
+      Using ONLY your analysis above (do not re-score from a fresh skim), assign the holistic Topic
+      Development score for this response on the 1–6 scale used in the assessment. The JSON score
+      must be **consistent** with your verdict: if your verdict placed the response at Band 5 on the
+      4-vs-5 boundary, the score must be 5, not 4. Respond ONLY with valid JSON, no markdown fences:
+      {"score": <integer 1-6>, "rationale": "<one short line>"}
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights: []
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck. Interrogation flow: this run’s
+      config-snapshot/chain-flows/*.json.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+
+      Interrogation: config-snapshot/chain-flows/*.json (not under extracted/).
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

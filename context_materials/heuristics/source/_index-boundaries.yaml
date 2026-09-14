@@ -1,0 +1,4 @@
+description: 1-vs-2 and 3-vs-4 boundary rules only (no surface/integration ceiling).
+heuristics:
+  - h-boundary-1-vs-2
+  - h-boundary-3-vs-4

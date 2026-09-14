@@ -1,0 +1,749 @@
+{
+  "package": "cyrus-replication-package",
+  "recommended_llm": "Gemma 3 12B Instruct",
+  "provider_neutral": true,
+  "responses_directory_expected_empty": true,
+  "file_count": 148,
+  "files": [
+    {
+      "path": ".env.example",
+      "bytes": 283,
+      "sha256": "60f1170c6f738e8fa29260e735a67efd5cefe738c7570c589d6a07262e0beada"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 51,
+      "sha256": "e8868f7f6715fef3b6ec2907b3924a7c9d9e5a2e84fab8cbebcd6e2cf7095980"
+    },
+    {
+      "path": "config/default.yaml",
+      "bytes": 1934,
+      "sha256": "5b94ca7b29fabe5ff4706b18b26fe40d25e28f6e93a36b8d318f700d1b3de511"
+    },
+    {
+      "path": "context_materials/feature_contracts/english-cv.json",
+      "bytes": 11335,
+      "sha256": "d6f6eb55a3f7f1d6a82bfb3b34a37465e7ba955841a21b66e4a42edd0ea5002d"
+    },
+    {
+      "path": "context_materials/feature_contracts/english-td.json",
+      "bytes": 5418,
+      "sha256": "c60b088b737f6df4876386fbe44350776e167f29e22427450691dda1d1dc038b"
+    },
+    {
+      "path": "context_materials/feature_contracts/french-cv.json",
+      "bytes": 10810,
+      "sha256": "b445c7649711bf80882d58580660216aed56d6f890300e3d8e4113471c412c0e"
+    },
+    {
+      "path": "context_materials/feature_contracts/french-td.json",
+      "bytes": 8859,
+      "sha256": "ed9373e3d94d91f8e1eb16c2e0b304a80f1a933b0520489baa9e704491ca298e"
+    },
+    {
+      "path": "context_materials/heuristics/README.md",
+      "bytes": 516,
+      "sha256": "1e7c40d9f63b6b878e19c40a2cbf5d7a8789a59fd8ee8eaa6d88289828122404"
+    },
+    {
+      "path": "context_materials/heuristics/source/_index-boundaries.yaml",
+      "bytes": 141,
+      "sha256": "98b37baef95e5132905134274bb334208266fb37219d3cdc8bc2baf73d93e014"
+    },
+    {
+      "path": "context_materials/heuristics/source/_index-cv.yaml",
+      "bytes": 780,
+      "sha256": "9bdb3a10525f9f2524b1c9132d7c01cd14c2933bdeb3b81d1dc5b351e84ea78f"
+    },
+    {
+      "path": "context_materials/heuristics/source/_index-interrogation.yaml",
+      "bytes": 376,
+      "sha256": "b7dcd88569687fd09ffbe3562763e93636472aa378899c1c8ce5401e67b67c5e"
+    },
+    {
+      "path": "context_materials/heuristics/source/_index-linguistic-tools-cv.yaml",
+      "bytes": 216,
+      "sha256": "9c6c3821b596fb7589798e91f76bcf2d37f9c645ad146d4dc8c895fc9aef64ac"
+    },
+    {
+      "path": "context_materials/heuristics/source/_index-linguistic-tools-td.yaml",
+      "bytes": 185,
+      "sha256": "e6e814aac938eb27feb4546bfa104527d3678414263070e661ffdfa9fec19ffb"
+    },
+    {
+      "path": "context_materials/heuristics/source/_index-or.yaml",
+      "bytes": 186,
+      "sha256": "291f7257cdb32869f2d138af5e327b2e949fffa13420a57923f300c70dc992db"
+    },
+    {
+      "path": "context_materials/heuristics/source/_index-td-stage1.yaml",
+      "bytes": 935,
+      "sha256": "9637e1f10fa3905c5110179b87f5dde3e39e37c8b71a8ca72fd8b0cf4e5a7364"
+    },
+    {
+      "path": "context_materials/heuristics/source/_index-td.yaml",
+      "bytes": 1381,
+      "sha256": "3b7f7df9ab18b094a0e3c78a8f724df3c24691158a1411cc0f3af25224ca1ab6"
+    },
+    {
+      "path": "context_materials/heuristics/source/_index.yaml",
+      "bytes": 1927,
+      "sha256": "7c16058b86e3c0e50bb301672e037aeee9a04ad66fdda24995106a4d3ea725ba"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-3-vs-4-sustained-throughout.yaml",
+      "bytes": 5668,
+      "sha256": "14fffa9bba3e2b3b7b19890abade07359aaeaea972b98c93704cac3afa701463"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-boundary-1-vs-2.yaml",
+      "bytes": 4188,
+      "sha256": "eb8281f24ecc6e55a48ab9405994917ea77f2c330c0ee1cc6d89df0d3f90f657"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-boundary-3-vs-4.yaml",
+      "bytes": 4327,
+      "sha256": "79830e27997577d35d34f86f4c7dbf025af3ef6f9a8f5c66e379abbee634906a"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-adequate-clear-but-flawed.yaml",
+      "bytes": 3522,
+      "sha256": "40c39cd73b811a98bf82b5164803f2de5d431fc4b64849ad06a6f04a81adefc8"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-distributed-control-evidence.yaml",
+      "bytes": 1161,
+      "sha256": "f5e7e8f7868a4f65cde2ea755579e60ff9aa575b795123b9c3cc43e1e8c5b106"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-error-tolerance.yaml",
+      "bytes": 2554,
+      "sha256": "cc4b733f30276ea27fa9cd1f8fe8814606e20a5d66729817b5938fd1aa43a3d5"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-first-draft-calibration.yaml",
+      "bytes": 2585,
+      "sha256": "3b3b37c2b454385d20facc704e0b1a15b07d0d0f8ea929dc33ef3e55a3af34e6"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-limited-when-fragments.yaml",
+      "bytes": 4093,
+      "sha256": "130617896355ad1519357170fc92a3626da241e730244d1e433818c05d3bedd5"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-meaning-impact-not-error-tally.yaml",
+      "bytes": 2797,
+      "sha256": "c42fd0e1adf3a8e5ced02e7f5fed57c99c9f83809fbc19b5c51d6b62467599a4"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-meaning-impaired-first.yaml",
+      "bytes": 4137,
+      "sha256": "484ecfac7cc2df05ab862017ffab2c8bd2e2bbcff3fbdde3a32026fe03106eaa"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-positive-negative-balance.yaml",
+      "bytes": 998,
+      "sha256": "38f786c596d50810eeb6ea057fabe052717af83dc6d9ae00ed50dbabfff16bd2"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-prefer-4-when-meaning-clear.yaml",
+      "bytes": 3520,
+      "sha256": "880026a3116debee6c02a2b7a0dade85802c7235079a5efb6a85b12dfdaa6340"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-rhythm-threshold.yaml",
+      "bytes": 2682,
+      "sha256": "95bd050a4bc01fcd282c407b524f712e344b920b56f27768b2553087241db579"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-spelling-not-sole-conventions-driver.yaml",
+      "bytes": 2888,
+      "sha256": "54a5d82798471a346a1f4201bc89df0143488bdc02854180092abd8f6964c250"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-spelling-same-word-count-once.yaml",
+      "bytes": 2764,
+      "sha256": "50c95c4c24bf210f5be1e34825a8e23ce26de34c584c0a2fd3c7c081ee8ea649"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-structural-collapse-1-vs-2.yaml",
+      "bytes": 2845,
+      "sha256": "c08751f4c5c52626e8ea590c9285ff8a8a2e755982508bba37e64948d6b30cb9"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-syntax-patterns-interfere-reading.yaml",
+      "bytes": 2976,
+      "sha256": "a28850c7e02048316c5d2043c51977f6c40eb22cae3bcc11f71fbc034bd046c5"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-systemic-penalty-2-vs-3.yaml",
+      "bytes": 2860,
+      "sha256": "5ece1ce1742a4598fd2ab65010f640a54cb9f50245002bf69f029a81f2e58d80"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-thorough-not-4-when-heavy-errors.yaml",
+      "bytes": 3696,
+      "sha256": "2e41b2eff227782d0c33a5fb3288b74d871e1de96967ebd559edb0300c1e75db"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-cv-thorough-when-clean.yaml",
+      "bytes": 3366,
+      "sha256": "b30914a1a4de3fa7879e02e7e60f0b5c12158c18689c2aa66a23e98b68904ddb"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-grade-2-requires-analytic-move.yaml",
+      "bytes": 3705,
+      "sha256": "e51085170093f9fdc1c8777ca89769a49fc73883df4c63561b4c2775840b7545"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-ignore-mechanical-structure-for-5-vs-6.yaml",
+      "bytes": 3015,
+      "sha256": "fe3750b1f6da4426e31b0ba24d0b6f46fe8b42fbbdc2773ff091d141f0773bf2"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-informational-multi-point-thorough.yaml",
+      "bytes": 3587,
+      "sha256": "f861e3b3988d8d81d76121ca697e3a2a76b2d650b0f81fe0cf57118634de1f8e"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-int-td-adaptive.yaml",
+      "bytes": 12323,
+      "sha256": "d8e7a30c3ef273e1fa1d16fb2881367a9bda4a42297f5528e3e106ebc1f51b4c"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-int-td-causal-scaffold.yaml",
+      "bytes": 7427,
+      "sha256": "05707917c814bd61acf1e4ed2b5e899e0c9e4112a01962c306fca175a62fb6e1"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-int-td-peel-the-onion.yaml",
+      "bytes": 8047,
+      "sha256": "f12900beb6126309ae19ad29ca19639c24727a6fded4f929adb40cf207501953"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-int-td-source-the-sources.yaml",
+      "bytes": 7946,
+      "sha256": "4fbfab6d587b00aa9a9db00c78105b6bba9e2c615645ab754366210054fefb9e"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-linguistic-language-trait-fit-guard.yaml",
+      "bytes": 1086,
+      "sha256": "4af41965be9356b5c0d89d07dee9977388cdc8577908e8df10c2fd3f07b21d3c"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-or-evidence-from-selection.yaml",
+      "bytes": 2721,
+      "sha256": "abc4a3ee2db9d4fe6f321e9ce6bf01079961c283f567fb714c0d8ce6951944d9"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-or-organizational-signal.yaml",
+      "bytes": 2610,
+      "sha256": "b32d39e7973dbd5c13b8ab7483398018fca4217a82d455c00ce14ba933bc6e33"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-or-relevant-detail-density.yaml",
+      "bytes": 2668,
+      "sha256": "079b1f6fd41158173a8c66044520237a31fac994965756edbfc6ca39da4aef39"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-resist-under-scoring-rich-persuasive.yaml",
+      "bytes": 3226,
+      "sha256": "873156db56b99af9859a5ec874263fc6e8f232adb7eefb3397773dba85524290"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-strict-1-when-responses-thin.yaml",
+      "bytes": 3924,
+      "sha256": "47aecb5a76be4393b110f7298468321c4cf089507b682348d95a27997a78d5de"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-strict-2-vs-3-unpacking-required.yaml",
+      "bytes": 3246,
+      "sha256": "682fc014e7b9ba0d1a1fdb3645d46bf04d51b3a1b00ed59f4c9cc77a662e8c1e"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-surface-vs-integration.yaml",
+      "bytes": 3280,
+      "sha256": "dd9f557cd62c9187469398cf46323275dbf69b17966ee7e46f3c24afa8b445a8"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-boundary-4-vs-5.yaml",
+      "bytes": 5169,
+      "sha256": "c8b28db5874f081027949a413231ab07bfc4c1183332ba0f5fcc012f4dcbcd0e"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-boundary-5-vs-6.yaml",
+      "bytes": 5779,
+      "sha256": "230df845b3682628a99948f5a20b3d6632ab9a38dfe98a8b247048debb552050"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-conjunctive-linguistic-structure.yaml",
+      "bytes": 1159,
+      "sha256": "3dceffbabf5cf7515acde650df7322c9e336869e15b02893bb1af0a9eb5cc737"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-consequence-anchor-audit.yaml",
+      "bytes": 3945,
+      "sha256": "3b9021b54e7dc49b11891954aad3adf18bf9b2f0bec397c913909c683e9865f6"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-consequence-anchor-check.yaml",
+      "bytes": 4486,
+      "sha256": "2cce706eab5c87dded02fe1931e1a8f0e9d2f3688d64e5c8f9cd5cdbf9f89706"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-consequence-audit-for-5.yaml",
+      "bytes": 4422,
+      "sha256": "217bf17bbc7f9990f7352e6fa9c47ee07c9492cb943ea2645d1a21224877bcb6"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-consequence-audit-requirement.yaml",
+      "bytes": 4268,
+      "sha256": "28dd7b504c53ee52ba7a0c148ec0f7a7c9816eb2e062dbf6d42183b4f64580a2"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-consequence-over-structure.yaml",
+      "bytes": 4553,
+      "sha256": "90af5e29cec89f7b41fbd64402311a5b6a3b61a03092079c5b97f2be34b75e6f"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-consequence-vs-label-audit.yaml",
+      "bytes": 4310,
+      "sha256": "8d9a7b946cfcdd5750ae8e05d22fb09bd88ac1a58d21a0dc419868900b3db04b"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-decouple-mechanics-from-depth.yaml",
+      "bytes": 4170,
+      "sha256": "1a4c367284e1f2c1dbffa79b0d00f742c287977494c072e52fd8d60376d14e2a"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-ignore-mechanical-for-5.yaml",
+      "bytes": 4495,
+      "sha256": "8096b24f5bc9a204948343789c97b100fb61c5301b9bed1cd371ebc35ea4d1c2"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-ignore-mechanical-structure-for-5-6.yaml",
+      "bytes": 3055,
+      "sha256": "f6d6ca8f7d4bea0e1621d5b87c6f6d9995a8075ea30986e0302df52b173c260f"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-ignore-mechanics-for-5-6.yaml",
+      "bytes": 4426,
+      "sha256": "d4e95c01db9a2034fd94c8ae40926e89a112fd9853e40fd749c0fd7714ab62f0"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-int003-ceiling-lift-5.yaml",
+      "bytes": 5670,
+      "sha256": "ea6b2fbaec2b9bb10a9951d64eccd330299fc04639e30a7f1d52c359208bef94"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-int003-ceiling-lift-6.yaml",
+      "bytes": 3882,
+      "sha256": "4e0f22db8b34d577be03419fbe52455a4fe8e5971d968c1e9fab7f2379aafd27"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-int003-mid-range-floor.yaml",
+      "bytes": 5040,
+      "sha256": "2ae06cfb7de1fbf49c1cf50e635043f4610cea736aaafebba06ad87616194423"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-laundry-list-penalty.yaml",
+      "bytes": 4411,
+      "sha256": "122155511542cf5100d788aadcb0ea8ca79b934d35649d3b46e83ea0cdd0e0c5"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-linkage-audit-requirement.yaml",
+      "bytes": 4556,
+      "sha256": "216cd768897bb022b277e3fd7730105119b0f1f3668b0bfcb7cfdf38d2eba063"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-linkage-audit-strict.yaml",
+      "bytes": 4234,
+      "sha256": "8d99af70cf6b1daef1158c61566993283b819acad9ffff79420e744ca0951c6c"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-multi-example-thorough-band4.yaml",
+      "bytes": 3343,
+      "sha256": "85b176606c8faa6a5cbe065176d7b8cef06a2a34ac03abd7a1f7630f12011ed6"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-named-entity-limit.yaml",
+      "bytes": 2962,
+      "sha256": "0cc38845907bdf6ec5a1d9ccfe7b9cc05ab5ff8c718c1ffc386f99fdbfb44de5"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-named-without-unpacking-floor-2.yaml",
+      "bytes": 4351,
+      "sha256": "94495881233db9156c3770a8162fa0613e2695a8adb01fd1879ea9cfef7a6bd7"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-no-polish-required-for-4.yaml",
+      "bytes": 3424,
+      "sha256": "8cdc73a4eb6abf7cd9ab93a76eb6b0f0c4fe0600310fe0495d765469d80f8031"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-parallel-complaints-limited2.yaml",
+      "bytes": 3145,
+      "sha256": "4ef7456dc0d95c7005c79d42c15bba4f43e5fa6fc5ba2fe101cfab12838e6cb3"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-prevent-laundry-list-3.yaml",
+      "bytes": 4185,
+      "sha256": "a067b8a8e1b303779373e4d9468869c9961fcfdbc025a44c2d7590f805a0aa15"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-prevent-laundry-list-overscore.yaml",
+      "bytes": 4497,
+      "sha256": "388434cc01edce037b2c2eed414168d91b709c41c01a3bd7979ff8f06ae4d238"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-prevent-mechanical-penalty-for-6.yaml",
+      "bytes": 4609,
+      "sha256": "72af5a0eb93661f3fdda310e37ceace196d0bbd926473996b7ef210efb4b315c"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-resist-auto-4-when-thin.yaml",
+      "bytes": 5249,
+      "sha256": "90501d83e33264d69cf147550937285da560a97cd3ce1d87bbd9ca6d63035c97"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-reward-pseudo-stats-and-named-entities.yaml",
+      "bytes": 3250,
+      "sha256": "533ce449c24251a4fac4f7deb8c84e1834e217e9ea10f3eddbdb578cdcdd5543"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-specificity-threshold-5.yaml",
+      "bytes": 2927,
+      "sha256": "a715ce4e8d76704a74fbd4bb57e98f5c13f56afbdd1e943c11dec49161341edd"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-threshold-for-6-thoughtful-progression.yaml",
+      "bytes": 4772,
+      "sha256": "7d2364f68bd1d3c58f485df148cab8f547a7ca1449877b8e9c459667cea9baf2"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-td-uneven-development-prefer-4.yaml",
+      "bytes": 3714,
+      "sha256": "a6fbf9fc685509f85f1d1766c2113486e3e6fa183f3c395f0701b1788b2feeef"
+    },
+    {
+      "path": "context_materials/heuristics/source/h-tighten-2-vs-3-generic-assertion.yaml",
+      "bytes": 3998,
+      "sha256": "d473cb57acc6ed4d4ceada13365f1709a14437b45d709f5ca3942e8983f10fc9"
+    },
+    {
+      "path": "context_materials/model/default-model.yaml",
+      "bytes": 413,
+      "sha256": "ba344ecb95647cc8d09354287cfdb522aca6b58780f628dbda2c41ccecf06deb"
+    },
+    {
+      "path": "context_materials/profiles/analytic-profile.md",
+      "bytes": 1094,
+      "sha256": "e6059b10b049fcaeb2938ba1492a7347b5caca894b574684707e23db1ef1e5cd"
+    },
+    {
+      "path": "context_materials/profiles/annotation-derived-observations.md",
+      "bytes": 1557,
+      "sha256": "3aceffc542694e7e3b22f8803f415332e46df66efacdb05d7671220b30427340"
+    },
+    {
+      "path": "context_materials/profiles/boundary-ladder.md",
+      "bytes": 1170,
+      "sha256": "4e0d00ca9775084e4472f517d15f9d16a12caf03d1748862d807a0479bdd89e4"
+    },
+    {
+      "path": "context_materials/profiles/counterfactual-check.md",
+      "bytes": 652,
+      "sha256": "a8e062cf43dbd40ee33a28f69aa287898eb9fa09c92bb5bd619eb0c496084e9b"
+    },
+    {
+      "path": "context_materials/profiles/cv-analytic-profile.md",
+      "bytes": 493,
+      "sha256": "0e8a1e43b2ba0446512de03909857e0db3d1acc3a71fa2a1ac95d7441baf7b3d"
+    },
+    {
+      "path": "context_materials/profiles/cv-annotation-observations.md",
+      "bytes": 534,
+      "sha256": "c4c4cb6a4ec0968af69661bcc13f3f88750a96fcb535927a05f9bc8da77f7b5b"
+    },
+    {
+      "path": "context_materials/profiles/cv-conventions-control-audit.md",
+      "bytes": 1383,
+      "sha256": "93c43c377a94d20baf928e50c4ccc65f0d890160edfcae6750189dc5b3f6ee8c"
+    },
+    {
+      "path": "context_materials/profiles/cv-counterfactual.md",
+      "bytes": 514,
+      "sha256": "6971b34a85727d895288ef02c59bc3df65658386b105041abd3d9b39d0c0bc15"
+    },
+    {
+      "path": "context_materials/profiles/cv-deterministic-evidence.md",
+      "bytes": 570,
+      "sha256": "80ad2f983248ad5dfa8364dbb6191307fb9bcc1ee4c3a85f64ccb4e381e96462"
+    },
+    {
+      "path": "context_materials/profiles/cv-field-scoped-falsifiers.md",
+      "bytes": 1610,
+      "sha256": "3cd712de4144f46fb31049df91c277437109f6f4827a9bff83816ac736b714b6"
+    },
+    {
+      "path": "context_materials/profiles/cv-field-scoped-observations.md",
+      "bytes": 1840,
+      "sha256": "7421fc8b41bcfd3b0c0ba4b3a63b3c3f479a4ed4a66142b417909c55174f8fdb"
+    },
+    {
+      "path": "context_materials/profiles/cv-first-principles.md",
+      "bytes": 552,
+      "sha256": "82716aa314c432d39298aa26f543d56db5030e57bb224f62a5170477ccf4d44c"
+    },
+    {
+      "path": "context_materials/profiles/cv-reader-burden-audit.md",
+      "bytes": 1786,
+      "sha256": "2c2f42531579ff993a6583bb349a066a0c128809577949b67204e42b2c252611"
+    },
+    {
+      "path": "context_materials/profiles/cv-sentence-ledger-audit.md",
+      "bytes": 1721,
+      "sha256": "47e3299a3abf8838de9feb2e032bf9032d7b26fff9adbd2ed5bbee26a3c0dc95"
+    },
+    {
+      "path": "context_materials/profiles/cv-teacher-observations.md",
+      "bytes": 564,
+      "sha256": "38b24594fcbffb0048906190aea0ba17da661fbb3a8a7f0dec029d42db7b3336"
+    },
+    {
+      "path": "context_materials/profiles/descriptive-writing-profile.md",
+      "bytes": 1173,
+      "sha256": "a6ffc65438b12e8833fa04c4c46df4674b33f304e85e8ab04d7a927e7402c64d"
+    },
+    {
+      "path": "context_materials/profiles/deterministic-evidence-use.md",
+      "bytes": 889,
+      "sha256": "935215079bbe38865afbcc8ac68d638a1233bdd93857ef4b9c08ca62cebef044"
+    },
+    {
+      "path": "context_materials/profiles/first-principles-core.md",
+      "bytes": 1310,
+      "sha256": "26df5512dbc6e7c8c86b3874e6bc995b0bb3391be117e7b01b665e741d25bbe9"
+    },
+    {
+      "path": "context_materials/profiles/linguistic-feature-evidence-use.md",
+      "bytes": 1028,
+      "sha256": "1e1ec33493f4443878bd11167fcbc18ea580d60e7e6dd448ea0f8dea8d33fef9"
+    },
+    {
+      "path": "context_materials/profiles/td-analytic-profile.md",
+      "bytes": 560,
+      "sha256": "9cfd01c837d77803ad7ce3327f262c8d2be7b65ffa76a2d4e9ceb2c89e131916"
+    },
+    {
+      "path": "context_materials/profiles/td-annotation-observations.md",
+      "bytes": 625,
+      "sha256": "54ef107c55306d0e0eac8f4dff93a19ce7f2567f4adf34ab35f0b1c4eb1ac3ab"
+    },
+    {
+      "path": "context_materials/profiles/td-counterfactual.md",
+      "bytes": 510,
+      "sha256": "91ec2971f24efb1a97c3b6264953f0b968927e315345d06296030fc7fc47992e"
+    },
+    {
+      "path": "context_materials/profiles/td-deterministic-evidence.md",
+      "bytes": 472,
+      "sha256": "4a3442d57de772587d05f1663abb1f573187b6ed5bafac78970c7f80d2a8ecc6"
+    },
+    {
+      "path": "context_materials/profiles/td-field-scoped-falsifiers.md",
+      "bytes": 1840,
+      "sha256": "d8f1c06bf1c6c89ef26308923f787462485cc9a71850e7e23ae3d5caa05ef890"
+    },
+    {
+      "path": "context_materials/profiles/td-field-scoped-observations.md",
+      "bytes": 1968,
+      "sha256": "fc8fb898ba8eec92713d409029da647cf650a7b9a819884e602560e2673bbd2f"
+    },
+    {
+      "path": "context_materials/profiles/td-first-principles.md",
+      "bytes": 736,
+      "sha256": "2af9562ad472a8c537273460b777c11f77ac740078b90e598ebafff03d0263b7"
+    },
+    {
+      "path": "context_materials/profiles/td-teacher-observations.md",
+      "bytes": 544,
+      "sha256": "f9f6b15f8146ba934657d876bb4feb5032b574be81e286b04d2425f39e896aa1"
+    },
+    {
+      "path": "context_materials/profiles/teacher-distilled-language.md",
+      "bytes": 1333,
+      "sha256": "34cd772fe8298f036ceb11a0e27f8fff81a0f284cdf4b87ef7e850bc7b34ccc9"
+    },
+    {
+      "path": "context_materials/routing_patterns/four-quadrant.yaml",
+      "bytes": 1073,
+      "sha256": "f5f40a5a548ebaece6536c751b53b1947b424a4fbfbb12a4b100be3a29ff7ff0"
+    },
+    {
+      "path": "context_materials/rubric/cv.md",
+      "bytes": 1153,
+      "sha256": "30e25277c05076c9dc66fa4bac5e25fc756055e43306955c869d291fe309a6c5"
+    },
+    {
+      "path": "context_materials/rubric/td.md",
+      "bytes": 1487,
+      "sha256": "d3f2fc7a31bb086810fb139ee135f436e00a2c39df263d21031f49c75b456bc3"
+    },
+    {
+      "path": "docs/01-overview.md",
+      "bytes": 2266,
+      "sha256": "849c57ca38d0e40aaf2e0ba7c4282fa0bbdcead83df3d0b8bf6c6e19ade6cc64"
+    },
+    {
+      "path": "docs/03-heuristics.md",
+      "bytes": 3491,
+      "sha256": "c2a8f2e92a8085ce984228f897a1777bdbf50da00c273c4b4960417bb7c6b57d"
+    },
+    {
+      "path": "docs/04-routing-patterns.md",
+      "bytes": 2686,
+      "sha256": "5db1e4b8ffed8635c3906a2b35871512a649624986902916943ecc89c08ea75d"
+    },
+    {
+      "path": "docs/05-known-strengths.md",
+      "bytes": 2348,
+      "sha256": "f10c204e44bd83acb451859da71c0569ab8db440e834ff1c527c758d3f4c063c"
+    },
+    {
+      "path": "docs/06-input-output-contracts.md",
+      "bytes": 1528,
+      "sha256": "f070e52c26865c61bb4b1a6f5868d5e20c2ce4470beadc15804f586402a165ee"
+    },
+    {
+      "path": "docs/07-replication-protocol.md",
+      "bytes": 1456,
+      "sha256": "53ca904d088ccc8fa8021581dbc34ecd2f0b7be11ead0bd6ee1f1721ed0d80ef"
+    },
+    {
+      "path": "docs/08-deployment.md",
+      "bytes": 2242,
+      "sha256": "e39348c51e469f996f9bd963813e8d1a350e784c739a57ede403bd2dc9f85639"
+    },
+    {
+      "path": "docs/approaches/english-cv.md",
+      "bytes": 2411,
+      "sha256": "35531a2f63b9ce6509fa5c652c37595c5a7a9fd0e48974798ca6ae43cdcdff2a"
+    },
+    {
+      "path": "docs/approaches/english-td.md",
+      "bytes": 1507,
+      "sha256": "4c1f06b5f7ec66c5b3518f91414707ba8eca0c308bec8e31be0d24d50ae79edb"
+    },
+    {
+      "path": "docs/approaches/french-cv.md",
+      "bytes": 1484,
+      "sha256": "ecef8b651426309e5a1323114c7d2cd1feab5d78eaf1609a4e262593dd75c4fc"
+    },
+    {
+      "path": "docs/approaches/french-td.md",
+      "bytes": 1815,
+      "sha256": "e2c33451ff27fff34a34bc31307dab37132b471af7ff6d93b564af404d7687c7"
+    },
+    {
+      "path": "docs/README.md",
+      "bytes": 582,
+      "sha256": "77b5608f699870fbad6d31182edc500fc79ec6fce27aa718002038ff1e7c28d6"
+    },
+    {
+      "path": "lib/awe_scoring/__init__.py",
+      "bytes": 97,
+      "sha256": "637496b1325d09fba3dabdc4b0353cdec8654533eb8b682090c0f3f23d118660"
+    },
+    {
+      "path": "lib/awe_scoring/config.py",
+      "bytes": 585,
+      "sha256": "87880523e5df0980082eb007b5afcab9224aaf1814c9c90ea3ddf5ff6f9f7901"
+    },
+    {
+      "path": "lib/awe_scoring/estimators.py",
+      "bytes": 5583,
+      "sha256": "1384acb294205724244005acef9b65ce2a8465180744adf3fa2865d0a1a4f297"
+    },
+    {
+      "path": "lib/awe_scoring/evaluation.py",
+      "bytes": 6042,
+      "sha256": "1555ea68d061fcf26397a05cd3e1cf2a82498bee2b5b24e1df05083a3429de66"
+    },
+    {
+      "path": "lib/awe_scoring/features.py",
+      "bytes": 5974,
+      "sha256": "ddc18602c8a26f3cf8df7da403537f19d417bfef9159052575b11302d98b31db"
+    },
+    {
+      "path": "lib/awe_scoring/io.py",
+      "bytes": 1611,
+      "sha256": "1800939dc624a9b031e5c8531831a60e277b70cbc8813c6026afe0aa59f52d88"
+    },
+    {
+      "path": "lib/awe_scoring/model_adapters.py",
+      "bytes": 7945,
+      "sha256": "f14a7f3a5d31bc631bfb8165b37a4eb4e7689046952d2804216ee9aeba8d3bdd"
+    },
+    {
+      "path": "lib/awe_scoring/pipeline.py",
+      "bytes": 6513,
+      "sha256": "23a1fac0133f5a766eb5d59e00dcc560b7fc1c7b9a3fede1d471cfc6b0fff370"
+    },
+    {
+      "path": "lib/awe_scoring/profiles.py",
+      "bytes": 9876,
+      "sha256": "9671d211f05a11d9f3980fefe4b8458c02c7abea5fd113d97b9d65e9b2a6bbdf"
+    },
+    {
+      "path": "lib/awe_scoring/routing.py",
+      "bytes": 1680,
+      "sha256": "0654302ca841e5be2fb45aff741cba6a9773de9158dc8ed4f8dd458f778a9ed0"
+    },
+    {
+      "path": "lib/dependencies/build_manifest.py",
+      "bytes": 1574,
+      "sha256": "5d7bd130c0e23ac0f2ee54872dae5a568fdf2b80afd0ce9c433490eb99be7d7f"
+    },
+    {
+      "path": "lib/dependencies/export_feature_contracts_from_source.py",
+      "bytes": 2029,
+      "sha256": "e11788a9469b990dfffcef593403f0b9461f074a6a5f15ae184ddba7ff900794"
+    },
+    {
+      "path": "lib/dependencies/initialize.py",
+      "bytes": 1271,
+      "sha256": "a277aab35fe64c87adb262ab7ae78adf58d34b40a164482d027eddf54cf383d2"
+    },
+    {
+      "path": "lib/dependencies/requirements.txt",
+      "bytes": 76,
+      "sha256": "4385093fad9b8cf40c767602c6f33418e8f3cdab42f0b002f7ed8bd5f7f855ef"
+    },
+    {
+      "path": "lib/scripts/evaluate.py",
+      "bytes": 1584,
+      "sha256": "0ce16c79eaa86cc5df311f01744d5522a98f141f055a5824b1fa384dea4e40e2"
+    },
+    {
+      "path": "lib/scripts/run.py",
+      "bytes": 3302,
+      "sha256": "adf08773f4c60c4ed9bd4e9e1467a4f2317f1a2be975bdb75a56f0c8cce54028"
+    },
+    {
+      "path": "lib/tests/fixtures/smoke.jsonl",
+      "bytes": 791,
+      "sha256": "9f7079bc72f1435d9aa1d788a4c1bb5b9bf90bc1a2052fc2ce6b36d11f249d12"
+    },
+    {
+      "path": "lib/tests/test_core.py",
+      "bytes": 5010,
+      "sha256": "e64a2869a3ee512b28b928ad31502046f6d4939d387af4041f7d0bdac000124e"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2717,
+      "sha256": "15ba236ff7e9c2d754302eb1d908e77e859d32940fcfb3ec095c829c138d3387"
+    }
+  ]
+}

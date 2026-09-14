@@ -1,0 +1,94 @@
+id: h-boundary-3-vs-4
+description: >
+  Score 3 = adequate analysis; some specificity but gaps, thin moves, or critique-by-enumeration
+  without development. Score 4 = sustained analysis where moves are developed (not just listed), OR
+  strong literary pattern: claim + organized stages + explicit symbol tied to choices.
+grounded_in: >
+  Training: 50004 (score 4) offers claim, counterpoints, qualification, and trade-offs.
+
+  50006 (score 4) traces form → meaning → speaker's ambivalence with precise commentary.
+
+  50002 (score 4): expert — 'clear claim, organized stages, explicit symbol tied to choices'
+  (structural specificity counts; quotes not required).
+
+  50008 (score 3): expert — 'Adequate critique of gaps; could extend evaluation of sources.' Lists
+  concrete omissions without developing each line.
+consumes:
+  - td-staged-reasoning
+  - td-claim-evidence-wiring
+  - td-specificity
+decision: >
+  LITERARY: If clear claim + organized stages + explicit symbol/motif tied to choices → 4 on TD (do
+  not require direct quotes).
+
+  PERSUASIVE/OPINION (non-critique): If several distinct reasons each have an elaborated sentence or
+  concrete example, prefer 4 over 3. Do not cap at 3 solely because intro/conclusion summarize the
+  body or the essay “lists” reasons when each reason is actually developed.
+
+  PERSUASIVE/CRITIQUE: If the student enumerates gaps or improvements but does not develop each with
+  sustained reasoning → cap at 3.
+
+  OTHERWISE: If 3+ moves AND each move is developed with explanation or linkage → 4. If moves are
+  only named or listed → 3.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "30"
+        text: >-
+          The essay is related to the prompt and expresses a clear opinion. There are insufficient
+          and/or
+
+          vague supporting details or the connection of the details to the opinion is not always
+          clear. There is
+
+          evidence of content organization, but lapses distract from the overall communication
+        highlights: []
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

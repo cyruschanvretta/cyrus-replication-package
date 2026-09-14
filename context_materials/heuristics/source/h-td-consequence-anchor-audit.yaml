@@ -1,0 +1,88 @@
+id: h-td-consequence-anchor-audit
+description: >-
+  Corrects over-scoring in the 1-2 and 2-3 range. The model currently sees lists of nouns (e.g.,
+  'schools, factories, gyms') and assigns Band 2. An expert assigns Band 1 if these nouns are merely
+  listed without any 'analytic glue' (verbs of consequence or impact).
+grounded_in: >-
+  Grounded in taqr_ids: 430254766, 266778344
+
+  430254766: Model saw nouns as development; 266778344: Model saw 'new things, new places' as Band 2
+  development.
+consumes:
+  - td-laundry-list-detection
+  - td-noun-list-audit
+  - feature-analytic-glue-density
+decision: >-
+  Before assigning a score of 2, you must perform a 'Linkage Audit' on all identified nouns in
+  `td-laundry-list-detection`. 
+
+
+  If the student provides a list of nouns (e.g., 'schools, factories, markets') but there are NO
+  verbs of consequence (e.g., 'leads to', 'causes', 'results in') or explanatory phrases (e.g.,
+  'because', 'so that') connecting these nouns to an opinion, you MUST assign a score of 1. 
+
+
+  A score of 2 requires at least one instance of 'analytic glue' where a noun is explicitly tied to
+  an impact. If the response is merely a collection of labels, it is Band 1. Do not allow a list of
+  nouns to substitute for development.
+boundary: 1 vs 2
+risk: Could under-score Band 2 responses that have very thin but present links.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights: []
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

@@ -1,0 +1,94 @@
+id: h-td-linkage-audit-strict
+description: >-
+  Corrects the error where the model assigns Band 2 or 3 to 'laundry lists' that use causal verbs.
+  The model must verify that the 'consequence' is not just a restatement of the 'claim'. If the
+  student says 'X is good because it is good' or 'Heat is bad because it causes heat', this is NOT
+  analytic glue; it is a tautology and should be capped at Band 2.
+grounded_in: >-
+  Grounded in taqr_ids: 430254766, 443269976, 429153115
+
+  430254766: Model saw nouns and gave 2, but expert gave 1 because no linkage existed; 443269976:
+  Model saw 'linkage' and gave 3, but expert gave 2 because the link was vague/tautological.
+consumes:
+  - td-consequence-linkage-density
+  - td-noun-expansion-ratio
+decision: >-
+  Before assigning a score of 3 or higher, perform a 'Tautology Check' on all identified
+  'consequence' links. 
+
+
+  Examine every instance where a student uses a causal verb (e_e., 'leads to', 'causes', 'results
+  in'). Ask: Does the consequence provide NEW information, or does it merely restate the initial
+  claim using different words? 
+
+
+  Example of TAUTOLOGY (Score 2): 'A leader must be kind because being kind is a good trait.' or
+  'Heat is bad because it causes heat-related issues.' 
+
+  Example of VALID LINKAGE (Score 3/4): 'Heat is bad because it leads to increased electricity costs
+  for air conditioning.' 
+
+
+  If the 'consequence' is purely circular or provides no substantive 'how' or 'why', you MUST cap
+  the score at 2, regardless of how many nouns are listed.
+boundary: 2 vs 3
+risk: Could under-score valid but simple causal links (e.g., 'Snow makes roads slippery').
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights: []
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

@@ -1,0 +1,20 @@
+description: >-
+  Topic Development (TD) heuristics — Stage 1 deduplication (Programme 3). Reduces 36 rules to 25 by keeping one
+  representative per construct cluster. Dropped rules are still on disk but not loaded; see _index-td.yaml for the full
+  set. Clusters deduped: mechanical-structure (5→2), laundry-list (3→1), consequence-audit (5→2), linkage-audit (2→1),
+  boundary-calibrators (4→2).
+heuristics:
+  # ── Band 1-2 boundaries ──
+  - h-boundary-1-vs-2
+  - h-strict-1-when-responses-thin
+  - h-grade-2-requires-analytic-move
+  - h-tighten-2-vs-3-generic-assertion
+  - h-td-named-without-unpacking-floor-2
+  # ── Cross-band signals ──
+  - h-td-named-entity-limit
+  - h-td-ignore-mechanics-for-5-6
+  - h-td-prevent-mechanical-penalty-for-6
+  # ── int-003 (covers 3↔4, 4↔5, 5↔6 boundaries) ──
+  - h-td-int003-mid-range-floor
+  - h-td-int003-ceiling-lift-5
+  - h-td-int003-ceiling-lift-6

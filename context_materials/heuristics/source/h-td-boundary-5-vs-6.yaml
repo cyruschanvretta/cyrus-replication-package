@@ -1,0 +1,114 @@
+id: h-td-boundary-5-vs-6
+description: >
+  The platform rubric distinguishes 5 (code 50) from 6 (code 60) on **thoughtfulness**. At 5,
+  details are "specific." At 6, details are "specific" AND "thoughtfully chosen." Organization goes
+  from "logical" to "coherent and demonstrates a thoughtful progression of ideas." Score 6 when the
+  response meets the rubric's 60-band descriptor.
+grounded_in: >
+  OSSLT_Rubric_TD_2025.pdf (rubric-b29afc2906ecf0b9.md) — verbatim platform rubric. Runs 048–049:
+  AI=4 / expert=6 on 3 persistent taqr_ids (170859274, 280069480, 262106385). Expert rationale for
+  262106385 cites: "idées secondaires suffisantes, précises et choisies avec soin" (sufficient,
+  precise, thoughtfully chosen), "progression des idées rigoureuse" (rigorous progression), "réponse
+  fluide et convaincante" (fluid and convincing).
+consumes:
+  - td-elaboration-quality
+  - td-structural-completeness
+  - td-multi-axis-argument
+  - td-overall-synthesis-strength
+decision: |
+  TD: After confirming the response meets code-50 criteria (specific details,
+  logical organization), check BOTH:
+    (a) Are the details THOUGHTFULLY CHOSEN — not just specific but selected
+        with care for relevance, precision, and persuasive impact? Each example
+        should feel deliberate and well-introduced, not merely concrete.
+    (b) Is the organization COHERENT with THOUGHTFUL PROGRESSION — ideas build
+        on each other with varied connectors, the conclusion extends or opens
+        rather than merely restating, and the overall piece reads as a unified
+        argument rather than a set of parallel paragraphs?
+  If BOTH hold, score 6 (code 60).
+  If details are specific but not notably thoughtful, or progression is logical
+  but not coherent/thoughtful, stay at 5.
+  Domain cue (5 vs 6): When the writer draws on a **specialized domain** (e.g.
+  health, environment, infrastructure, policy, technology) and uses **causal
+  mechanisms** (how or why X leads to Y; chains of consequence), that strongly
+  supports "thoughtfully chosen" details — often enough to justify code **60**
+  when (a) and (b) above are also met. Specific-but-generic examples without
+  that domain-mechanism depth typically remain in the 50 band.
+  Ordinal tolerance (5 vs 6): **Firstly / Secondly / Finally** (or French
+  Premièrement / Deuxièmement) do **not** block code **60** when each section
+  contains substantive unpacking and causal links. Worked example: the response
+  uses Firstly/Secondly/Thirdly but each section has causal reasoning and
+  domain depth → ordinals are **scaffolding**, not “mechanical” → still
+  **eligible for code 50 or 60** when (a) and (b) are satisfied.
+  Guardrail: 6 is the top code. Reserve it for responses where the selection of
+  details and the progression of ideas are both genuinely distinguished.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights:
+          - specific
+      - code: "60"
+        text: >-
+          The essay is related to the assigned prompt. A clear and consistent opinion is developed
+          with
+
+          sufficient specific supporting details that are thoughtfully chosen. The content
+          organization is
+
+          coherent and demonstrates a thoughtful progression of ideas.
+        highlights:
+          - coherent and demonstrates a thoughtful progression of ideas.
+          - thoughtfully chosen.
+          - thoughtfully chosen
+          - progression
+          - thoughtful
+          - specific
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      Concrete scored responses in extracted rationales match taqr ids cited in grounded_in; use
+      them to sanity-check the boundary.
+    references: >-
+      Resolved from grounded_in: data-container/prod/extracted/rationales/tpcl/td/6/t262106385.md
+
+      Broader pool pattern: data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md
+      (tpcl/ mirrors).
+
+      Cross-check taqr_id from platform exports; older ids may not resolve here.
+    link: indirect

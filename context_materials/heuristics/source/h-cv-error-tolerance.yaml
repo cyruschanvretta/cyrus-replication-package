@@ -1,0 +1,51 @@
+id: h-cv-error-tolerance
+description: >-
+  Corrects the error where the model caps scores at 3 due to 'noticeable' or 'recurring' errors that do not actually
+  constitute 'systemic' failure. It instructs the model to distinguish between 'local slips' (Band 4) and 'systemic
+  noise' (Band 3).
+grounded_in: >-
+  Grounded in taqr_ids: 166451843, 428989550, 162708117
+
+  166451843: Model over-penalized comma splices/spelling as 'noticeable' instead of 'minor'; 428989550: Model
+  over-penalized punctuation/S-V agreement as 'recurring' instead of 'local'; 162708117: Model over-penalized
+  capitalization/comma splices as 'recurring' instead of 'minor'.
+consumes:
+  - cv-error-density-systemic
+decision: >-
+  Distinguish between 'local slips' and 'systemic noise'. 
+
+
+  Assign a 4 if errors are 'minor', 'local', or 'occasional'. This includes single instances of spelling errors, a
+  single comma splice, or a single subject-verb agreement error. A 4 does NOT require perfection; it requires 'sustained
+  control'.
+
+
+  Assign a 3 if errors are 'frequent', 'recurring', or 'systemic'. If the errors appear in almost every paragraph or
+  affect multiple sentence types (e.g., simultaneous issues with spelling, punctuation, AND grammar), the control is no
+  longer 'sustained', and you must cap the score at 3.
+
+
+  Use `cv-error-density-systemic` to make this distinction. If the density is 'high' or 'frequent', do not award a 4.
+boundary: 3 vs 4
+risk: Could over-score responses with actual systemic errors as 4.
+sme_traceability:
+  training_material:
+    high_level: >-
+      EQAO Conventions (sp9-CV) scorer training — first-draft framing and “not a hunt for errors” support
+      distinguishing local slips from systemic patterns; Grade 9 control anchors thorough band.
+    references: >-
+      data-container/prod/extracted/training-materials/guides/wi-1130-sp9-CV.md (sibling windows 1132, 1134, 1136).
+
+      Canonical excerpts: data-container/prod/extracted/training-materials/cv-scorer-training-elements.yaml
+    link: indirect
+    training_element_ids:
+      - cv-train-first-draft-reminder
+      - cv-train-td-decoupling
+      - cv-train-page5-control-what-it-looks-like
+      - cv-train-page8-spelling-scoring-reminders
+      - cv-train-page9-spelling-commonly-misspelled
+      - cv-train-page10-usage-incorrect-examples
+      - cv-train-page11-grammar-pronouns-and-agreement
+      - cv-train-page12-grammar-tense-adverb-article-verbform
+      - cv-train-page13-punctuation-expectations
+      - cv-train-page15-classification-descriptors

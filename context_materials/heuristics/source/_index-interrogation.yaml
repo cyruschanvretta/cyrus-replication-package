@@ -1,0 +1,8 @@
+description: >-
+  Interrogation bundles (multi-turn /chat sequences for TD analysis). These are NOT merged into standard
+  single-shot scoring context (_index-td). Referenced by chain flows under inferred/chain-flows/ and executed
+  via node scripts/interrogate-response.js.
+heuristics:
+  - h-int-td-peel-the-onion
+  - h-int-td-causal-scaffold
+  - h-int-td-source-the-sources

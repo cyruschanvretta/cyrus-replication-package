@@ -1,0 +1,147 @@
+id: h-int-td-source-the-sources
+kind: interrogation_bundle
+title: Source the Sources — Thoughtfulness Probe
+description: >-
+  The model reliably detects 'consistent specificity' (Band 5) but cannot see past it to
+  'thoughtful' progression (Band 6). This chain investigates what makes evidence selection strategic
+  rather than merely specific: epistemic diversity, authoritative grounding, and deliberate
+  argumentative arc. A student who cites Harvard, a personal medical condition, AND a gym teacher is
+  making curatorial choices — the chain forces the model to notice that curation.
+rationale: >-
+  The model reliably detects 'consistent specificity' (Band 5) but cannot see past it to
+  'thoughtful' progression (Band 6). This chain investigates what makes evidence selection strategic
+  rather than merely specific: epistemic diversity, authoritative grounding, and deliberate
+  argumentative arc. A student who cites Harvard, a personal medical condition, AND a gym teacher is
+  making curatorial choices — the chain forces the model to notice that curation.
+interrogation_system: >-
+  You are an expert writing assessor investigating what elevates a student response beyond
+  'consistently specific' into 'thoughtful and coherent.' You are looking for evidence of deliberate
+  intellectual choices — not just good vocabulary or correct grammar, but strategic selection and
+  arrangement of evidence. Be precise and quote directly.
+target_boundary: 5 vs 6
+grounded_in_taqr_ids:
+  - 164589894
+steps:
+  - id: authority-audit
+    purpose: >-
+      Map the diversity of evidence sources — Band 6 writers tend to triangulate from multiple
+      epistemic domains, not just pile up examples from one
+    question: >-
+      List every appeal to authority, expertise, or specialized knowledge the student makes. For
+      each, classify it: (a) institutional/academic (e.g. naming a university or study), (b)
+      professional/expert (e.g. a doctor, teacher, specialist), (c) personal/experiential (e.g. 'I
+      suffer from...'). How many distinct epistemic sources does the student draw from?
+  - id: evidence-strategy
+    purpose: >-
+      Detect curatorial intent — the difference between a student who happens to have good examples
+      and one who is strategically building a case
+    question: >-
+      Look at the PATTERN of evidence selection across the whole response. Is the student
+      consistently drawing from the same type of source (e.g. all personal anecdotes), or is there
+      deliberate variety? Does the evidence become more or less authoritative as the essay
+      progresses? Is there a detectable strategy to how evidence is deployed?
+  - id: progression-test
+    purpose: >-
+      Test for 'coherent progression' vs. 'enumeration that happens to be well-supported' — the key
+      distinction at 5→6
+    question: >-
+      Trace the arc of the body paragraphs. Consider the DOMAINS the student moves through (not just
+      the transition words connecting them). Is there a progression — e.g., from
+      internal/psychological to external/physical to environmental? Or is the ordering arbitrary —
+      would swapping any two paragraphs leave the argument unchanged? What is the organizing
+      principle, if any?
+  - id: integration-moments
+    purpose: >-
+      Cross-pollination between sections is a strong Band 6 signal that single-pass scoring almost
+      never detects
+    question: >-
+      Find any moments where the student connects ideas ACROSS paragraphs or argument axes — where
+      evidence from one section informs or echoes another, or where the conclusion synthesizes
+      rather than merely summarizes. Quote these moments. Are there any, or does each section exist
+      in isolation?
+  - id: comparative-probe
+    purpose: >-
+      Force an explicit differential diagnosis between 5 and 6 rather than letting 'predictable
+      structure' collapse the distinction
+    question: >-
+      Imagine a typical Band 5 response on this same prompt: consistently specific details, clear
+      organization, sustained support. Now compare. What does THIS response have that a typical Band
+      5 would NOT? Be concrete — name the specific elements that separate this from the Band 5
+      floor.
+  - id: verdict
+    purpose: >-
+      Final judgment grounded in cumulative analysis of what makes a response 'thoughtful' rather
+      than merely 'thorough'
+    question: >-
+      Given the epistemic diversity, the evidence strategy, the progression arc, and the comparative
+      analysis: does this response demonstrate the 'thoughtful, coherent' quality of Band 6, or does
+      it remain — despite excellent specificity — at Band 5? State your verdict with the single most
+      compelling piece of evidence.
+  - id: holistic_score
+    purpose: Canonical numeric score for exact-agreement check against expert
+    question: >-
+      Using ONLY your analysis above (do not re-score from a fresh skim), assign the holistic Topic
+      Development score for this response on the 1–6 scale used in the assessment. Respond ONLY with
+      valid JSON, no markdown fences: {"score": <integer 1-6>, "rationale": "<one short line>"}
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights: []
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck. Interrogation flow: this run’s
+      config-snapshot/chain-flows/*.json.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+
+      Interrogation: config-snapshot/chain-flows/*.json (not under extracted/).
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

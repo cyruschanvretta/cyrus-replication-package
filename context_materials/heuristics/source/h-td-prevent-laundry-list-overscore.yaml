@@ -1,0 +1,101 @@
+id: h-td-prevent-laundry-list-overscore
+description: >-
+  Corrects the error where the model assigns a 4 or 3 to responses that are merely lists of nouns or
+  examples without explanation. It forces the model to check for 'analytic glue' (consequence, why,
+  or how) for each item in a list.
+grounded_in: >-
+  Grounded in taqr_ids: 429096017, 430254766
+
+  For 429096017, the model rewarded the mention of 'military officer' without checking if the point
+  was actually developed; for 430254766, it treated a list of nouns as 'opinion support' despite
+  zero elaboration.
+consumes:
+  - td-detail-unpack-depth
+  - td-reasoning-density
+decision: >-
+  Before assigning a score of 3 or 4, you must perform a 'Linkage Audit' on all concrete nouns or
+  examples identified via 'td-detail-unpack-depth'. 
+
+
+  For every specific example (e.g., 'hockey captain', 'factories', 'schools'), check if there is a
+  corresponding 'analytic move' (an explanation of why this matters, a consequence, or a causal
+  link). If a response contains multiple specific nouns but lacks 'analytic glue' (the 'how' or
+  'why'), you must cap the score at 2. 
+
+
+  Specifically, for the 3 vs 4 boundary: A score of 4 requires that the supporting details are
+  'sufficient'. If the details are merely 'present' but 'unelaborated' (i.e., they are just labels),
+  the score must be 3. 
+
+
+  Example of 2: 'I like cities because of schools, parks, and museums.' (List of nouns, no 'why'). 
+
+  Example of 3: 'I like cities because they have schools which provide education.' (Noun + simple
+  consequence).
+
+  Example of 4: 'I like cities because the density of schools allows for specialized programs like
+  coding, which prepares students for the future.' (Noun + specific elaboration).
+
+
+  Do not allow a 'laundry list' of examples to lift a score to 4.
+boundary: 2 vs 3 vs 4
+risk: Could under-score very brief but valid 3s that use simple nouns.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights: []
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

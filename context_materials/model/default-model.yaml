@@ -1,0 +1,14 @@
+schema_version: 1
+family: gemma-3-12b-it
+role: default_for_llm_backed_routes
+temperature: 0
+accepted_passes_per_response: 1
+output: compact_numeric_profile
+score_emission: forbidden
+deployment:
+  preferred_adapter: sagemaker
+  alternatives: [generic_http, ollama_local, python_callable]
+evidence:
+  confirmed_route: english-cv
+  pending_validation_routes: [french-td]
+known_issue: upper_ordinal_scale_compression

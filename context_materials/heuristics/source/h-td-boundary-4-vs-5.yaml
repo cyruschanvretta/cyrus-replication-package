@@ -1,0 +1,102 @@
+id: h-td-boundary-4-vs-5
+description: >
+  The platform rubric distinguishes 4 (code 40) from 5 (code 50) on two axes: **specificity of
+  details** and **organization quality**. At 4, "only some [details] are specific" and organization
+  is "mechanical." At 5, details are consistently "specific" and organization is "logical." Score 5
+  when the response meets the rubric's 50-band descriptor.
+grounded_in: >
+  OSSLT_Rubric_TD_2025.pdf (rubric-b29afc2906ecf0b9.md) — verbatim platform rubric. Runs 048–049:
+  AI=4 / expert=5 on 4 taqr_ids (428339354, 428954145, 428605885, 160713799). Model stopped at 4
+  because prior context only described a 1–4 scale. All four responses have consistently specific
+  details and logical (not merely mechanical) organization.
+consumes:
+  - td-elaboration-quality
+  - td-specificity
+  - td-structural-completeness
+  - td-multi-axis-argument
+decision: |
+  TD: The scoring scale is 1–6 (codes 10–60). After confirming the response meets
+  code-40 criteria (sufficient details, clear consistent opinion), check BOTH:
+    (a) Are the supporting details consistently SPECIFIC — not "only some are
+        specific"? Each major point should have concrete, particular illustrations
+        (named examples, consequences, mechanisms) rather than vague or generic
+        assertions.
+    (b) Is the content organization LOGICAL — not merely mechanical? **Do not**
+        treat Firstly/Secondly/Thirdly (or French équivalents) as “mechanical”
+        *by themselves*. They are scaffolding. “Mechanical” means ideas are
+        *only* enumerated with no connective reasoning or consequence between
+        parts — not that the student used ordinal signposting.
+  Worked example (4 vs 5): The response uses Firstly/Secondly/Thirdly, but each
+  section gives causal reasoning and concrete consequence (e.g. heat →
+  dehydration → focus; ordinal markers organize depth) → organization is
+  **logical**, not rote enumeration → **eligible for code 50** if (a) also holds.
+  If BOTH hold, score 5 (code 50).
+  If details are sufficient but only partially specific, or organization is
+  present but mechanical, stay at 4.
+  **Recovery before finalizing 4:** If the response has multiple argument axes and
+  each axis includes concrete particulars plus at least one consequence or
+  “why/how” link back to the thesis, re-check (a). “Consistently specific” often
+  warrants **5**, not 4 — do not stop at 4 solely because transitions feel plain.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights:
+          - mechanical
+          - specific
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights:
+          - specific
+          - logical.
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

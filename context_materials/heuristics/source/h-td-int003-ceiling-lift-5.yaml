@@ -1,0 +1,128 @@
+id: h-td-int003-ceiling-lift-5
+description: |
+  Fixes 4-5 boundary using NAMING vs DEVELOPING distinction.
+grounded_in: >
+  Intervention 003. Under-scored 5→4: 279880438, 429955579, 450050018. Over-scored 4→5: 279430532,
+  478523016.
+consumes:
+  - td-specificity
+  - td-elaboration-per-move
+  - td-multi-axis-argument
+  - td-claim-evidence-wiring
+decision: |
+  TD: ELABORATION DEPTH TEST — boundary 4↔5 ONLY.
+  Outputs ONLY 4 or 5. NEVER 3.
+
+  FIRST — SAME-PERSON CAP (check before anything else):
+  Scan all body paragraphs. If the SAME named person (e.g. the
+  same athlete, politician, celebrity) appears in 2 or more body
+  paragraphs → output BAND 4 immediately. Do not continue.
+
+  STEP 1 — FACT-DROP GUARD:
+  A named person/entity counts as DEVELOPING ONLY if 3+ sentences
+  explain HOW/WHY that person's actions → specific outcomes.
+  Name + 1-2 sentences + generic consequence = NAMING.
+
+  STEP 2 — CLASSIFY each body paragraph:
+  Count sentences beyond the topic sentence that add NEW reasoning.
+  A sentence that explains the topic using the same concepts (just
+  rewording the claim) is restatement, not new. Example: topic
+  "less car crashes" + "ice makes roads slippery causing crashes"
+  = restatement (same concept: crashes from ice).
+  0-1 new sentences → NAMING. 2+ new sentences → DEVELOPING.
+
+  Do NOT dismiss everyday topics (family, travel, housing, health)
+  as NAMING. Judge by sentence count, not topic. A paragraph about
+  visiting family with 3 reasoning sentences IS developing.
+
+  NAMING examples:
+  - "No extra costs. This includes paying for winter tires or
+    having to pay for them to be swapped out." = topic + 1 sentence.
+  - "Connor McDavid stayed with his team" + generic consequence.
+  - "Decrease of car crashes. Roads are slippery due to ice
+    causing crashes." = topic restated + 0 new sentences.
+  - Listed categories: "work, culture, religion"
+
+  DEVELOPING examples:
+  - Medical: "If you had a medical emergency in a small town,
+    paramedics take 30 minutes. In a city they arrive in minutes."
+  - Housing: "Enjoy a comfortable home with an amazing view. Not
+    squeezing a big family in a three bedroom house. Families can
+    enjoy more room to breathe." (3 new sentences.)
+  - Personal: "I would want to visit a cold country every once in
+    a while. This would help my mental health, and maybe even make
+    me grateful." (2+ sentences with consequence = developing.)
+
+  STEP 3 — PARALLEL-ENUMERATION GUARD:
+  If the response lists 5+ distinct reasons/points (count ordinal
+  markers like "First... Second..." even if grouped into fewer
+  paragraphs), this is breadth-without-depth → cap at BAND 4.
+
+  STEP 4 — SCORE (output ONLY 4 or 5, NEVER 3):
+  ALL paragraphs DEVELOPING (no guards triggered) → BAND 5.
+  2 of 3 paragraphs DEVELOPING → BAND 5. This IS "consistently
+  specific" per the rubric — majority developed = sufficient.
+  1 or 0 paragraphs DEVELOPING → BAND 4.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights: []
+      - code: "60"
+        text: >-
+          The essay is related to the assigned prompt. A clear and consistent opinion is developed
+          with
+
+          sufficient specific supporting details that are thoughtfully chosen. The content
+          organization is
+
+          coherent and demonstrates a thoughtful progression of ideas.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      Concrete scored responses in extracted rationales match taqr ids cited in grounded_in; use
+      them to sanity-check the boundary.
+    references: >-
+      Resolved from grounded_in: data-container/prod/extracted/rationales/osslt/td/5/t429955579.md
+
+      Broader pool pattern: data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md
+      (tpcl/ mirrors).
+
+      Cross-check taqr_id from platform exports; older ids may not resolve here.
+    link: indirect

@@ -1,0 +1,62 @@
+id: h-cv-meaning-impact-not-error-tally
+description: >
+  When scoring **CV** only: **consider the impact of conventions on communication of meaning** — scoring is **not** a
+  “hunt for the error” or “counting errors” exercise. Do not lower the band solely because a tally of issues is high if
+  reading remains smooth and meaning is intact.
+grounded_in: |
+  EQAO CV training p.5 callout (control-of-conventions slide).
+consumes:
+  - cv-meaning-flow
+  - cv-error-band
+  - cv-rhythm-disruption
+decision: |
+  CV: Weight **reading experience** and **meaning** over raw error counts.
+
+  If `meaning_flow` is clear and `cv-rhythm-disruption` is low, **do not** assign 2–3 just because multiple minor issues
+  exist (e.g., several typos or a few slips) — unless they **distract** or **interfere** as in the rubric.
+
+  Reserve down-scoring for patterns that force re-reading, interrupt rhythm, or obscure intent — aligned with training
+  sentence-structure guidance and interfere/distract descriptors.
+boundary: 2 vs 3 and 3 vs 4
+risk: Could under-penalize dense but locally “fixable” error fields if rhythm is misjudged as smooth.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Official CV codes turn on interfere / distract / do not distract — impact on communication, not error inventory.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-771a68c12a940f29.md
+    link: direct
+    rubric_excerpts:
+      - code: "20"
+        text: |-
+          Errors in conventions distract from communication.
+        highlights: []
+      - code: "30"
+        text: |-
+          Errors in conventions do not distract from communication.
+        highlights: []
+      - code: "40"
+        text: |-
+          Control of conventions is evident.
+        highlights: []
+  training_material:
+    high_level: >-
+      Training p.5 — meaning / not a hunt for errors; p.6–7 — structure and patterns that interfere with reading.
+    references: >-
+      data-container/prod/extracted/training-materials/cv-scorer-training-elements.yaml
+    link: indirect
+    training_element_ids:
+      - cv-train-page5-control-what-it-looks-like
+      - cv-train-page6-sentence-structure-syntax
+      - cv-train-page7-common-errors-runon-comma-fragments
+      - cv-train-page10-usage-incorrect-examples
+      - cv-train-page11-grammar-pronouns-and-agreement
+      - cv-train-page12-grammar-tense-adverb-article-verbform
+      - cv-train-page13-punctuation-expectations
+      - cv-train-page15-classification-descriptors
+  exemplar_selection:
+    high_level: >-
+      Prefer cases where human scorers prioritized reading impact over error counts.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/cv/<band>/t<taqr_id>.md
+    link: weak

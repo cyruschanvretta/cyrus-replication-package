@@ -1,0 +1,65 @@
+id: h-cv-spelling-not-sole-conventions-driver
+description: >
+  When scoring **CV** only: **weigh misspelled words as only one component of the conventions mark** (training p.8).
+  Do not let spelling dominate the decision when sentence control, punctuation, and usage are otherwise solid and
+  meaning is clear.
+grounded_in: |
+  EQAO CV training p.8 spelling weighting bullet; p.5 lists multiple convention dimensions (not spelling alone).
+consumes:
+  - cv-error-band
+  - cv-error-density-systemic
+  - cv-meaning-flow
+  - cv-sentence-variety
+decision: |
+  CV: If spelling is the **only** weak pillar but `cv-sentence-variety` and mechanics signals show sustained control,
+  **do not** pull the score down to Limited solely for spelling unless spelling **distracts** reading or pairs with
+  other convention failures.
+
+  Use `cv-error-density-systemic` to separate **local spelling slips** from **broad control collapse** across
+  dimensions.
+
+  This rule **pairs with** `h-cv-spelling-same-word-count-once`: spelling issues must not double-count as syntax and as
+  multiple spelling hits without reading impact.
+boundary: 2 vs 3 and 3 vs 4
+risk: Could over-score responses with many distinct spelling errors that cumulatively distract readers.
+sme_traceability:
+  rubric:
+    high_level: >-
+      CV band reflects overall convention impact; training explicitly limits spelling’s role in the mark.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-771a68c12a940f29.md
+    link: direct
+    rubric_excerpts:
+      - code: "20"
+        text: |-
+          Errors in conventions distract from communication.
+        highlights: []
+      - code: "30"
+        text: |-
+          Errors in conventions do not distract from communication.
+        highlights: []
+      - code: "40"
+        text: |-
+          Control of conventions is evident.
+        highlights: []
+  training_material:
+    high_level: >-
+      Training p.5 — five areas of control; p.8 — spelling is only one component of the conventions mark.
+    references: >-
+      data-container/prod/extracted/training-materials/cv-scorer-training-elements.yaml
+    link: indirect
+    training_element_ids:
+      - cv-train-page5-control-what-it-looks-like
+      - cv-train-page8-spelling-scoring-reminders
+      - cv-train-page9-spelling-commonly-misspelled
+      - cv-train-page10-usage-incorrect-examples
+      - cv-train-page11-grammar-pronouns-and-agreement
+      - cv-train-page12-grammar-tense-adverb-article-verbform
+      - cv-train-page13-punctuation-expectations
+      - cv-train-page15-classification-descriptors
+  exemplar_selection:
+    high_level: >-
+      Link exemplars with noticeable spelling but Adequate/Thorough conventions when other pillars hold.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/cv/<band>/t<taqr_id>.md
+    link: weak

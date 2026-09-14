@@ -1,0 +1,94 @@
+id: h-td-consequence-audit-requirement
+description: >-
+  Corrects the under-scoring of Band 4 and 5 responses. The model currently ignores valid 'analytic
+  glue' (cautious/causal links) if the prose is simple. It must look for the presence of a
+  'consequence' (e.g., 'leads to', 'results in', 'causes') attached to a concrete noun.
+grounded_in: >-
+  Grounded in taqr_ids: 430219169, 170184440, 160967597
+
+  430219169: Model ignored 'light pollution -> eye damage' link; 170184440: Model missed 'weather ->
+  sickness' link; 160967597: Model missed 'sunlight -> Vitamin D' link.
+consumes:
+  - td-consequence-linkage-density
+  - td-detail-unpack-depth
+decision: >-
+  Perform a 'Consequence Audit' on all identified concrete nouns in `td-detail-unpack-depth`. 
+
+
+  For every noun (e.g., 'taxes', 'snow', 'vitamin D'), check if the student provides a 'consequence'
+  or 'impact' statement. A consequence is a statement that explains the effect of the noun (e.g.,
+  'snow leads to accidents' or 'sunlight causes Vitamin D production'). 
+
+
+  If you find at least two such links in a response that otherwise has multiple axes, you MUST award
+  a score of 4 or 5, even if the language is simple or mechanical. Do NOT withhold a 4 or 5 just
+  because the student uses 'First, Second, Third' or because the prose is not 'sophisticated'. The
+  presence of the 'consequence' is the primary requirement for the 'Thorough' (4) and 'Specific' (5)
+  bands. 
+
+
+  Do NOT apply this if the 'consequence' is merely a tautology (e.g., 'being kind means being
+  nice').
+boundary: 3 vs 4/5
+risk: >-
+  Could over-score purely descriptive lists if they happen to use 'leads to' without actual
+  substance.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights: []
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

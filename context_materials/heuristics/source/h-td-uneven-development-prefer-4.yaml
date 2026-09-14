@@ -1,0 +1,80 @@
+id: h-td-uneven-development-prefer-4
+description: >
+  When scoring **TD** only: if **two or more** distinct reasons or paragraphs include real
+  elaboration, examples, or concrete illustration, do **not** cap the whole response at **3**
+  because **one** part is thin, repetitive, or circular — experts often still award **4** when
+  balance is clearly thorough.
+grounded_in: >
+  Operational “uneven parts” pattern; reduces AI=3 / expert=4 when one weak section anchors the
+  model.
+consumes:
+  - td-elaboration-per-move
+  - td-multi-axis-argument
+  - td-claim-recurrence-vs-progression
+decision: |
+  TD: If elaboration_per_move is adequate-or-better on two or more moves AND multi_axis_argument
+  shows at least two axes with some support, prefer 4 over 3 unless the thin section is the *only*
+  developed part (i.e. the rest is empty assertion). Do not treat one weak paragraph as vetoing 4
+  when the overall response still meets sustained, well-elaborated support on balance.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "30"
+        text: >-
+          The essay is related to the prompt and expresses a clear opinion. There are insufficient
+          and/or
+
+          vague supporting details or the connection of the details to the opinion is not always
+          clear. There is
+
+          evidence of content organization, but lapses distract from the overall communication
+        highlights: []
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

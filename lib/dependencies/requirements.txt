@@ -1,0 +1,5 @@
+boto3==1.43.93
+joblib==1.5.1
+numpy==2.4.4
+PyYAML==6.0.3
+scikit-learn==1.8.0

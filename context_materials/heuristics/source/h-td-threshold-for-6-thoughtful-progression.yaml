@@ -1,0 +1,103 @@
+id: h-td-threshold-for-6-thoughtful-progression
+description: >-
+  Distinguishes code 50 from code 60 using the rubric’s “thoughtfully chosen” and “thoughtful
+  progression” language. Must align with h-td-boundary-5-vs-6: ordinal scaffolding (Firstly /
+  Secondly) does not block 60 when sections contain substantive causal or domain-specific
+  development.
+grounded_in: >-
+  OSSLT TD rubric; cohort n=20 seed=47: under-calls at 6 (428613492, 437118961, 160800944) often
+  co-occur with over-weighting “mechanical” structure. Prior draft of this rule over-capped at 5 and
+  hurt agreement.
+consumes:
+  - td-overall-synthesis-strength
+  - td-structural-completeness
+  - td-technical-specificity-index
+decision: >-
+  TD — 5 vs 6:
+
+  **Prefer 6 (code 60)** when ALL of the following hold: - Supporting details are not only specific
+  but **strategically chosen** for the argument (e.g. authoritative
+    institutions, technical/clinical terms, or precise mechanisms that advance the thesis — not interchangeable examples).
+  - There is **visible progression**: later paragraphs or the conclusion build on earlier claims
+  (adds nuance,
+    consequence, or synthesis), not a flat list of parallel facts.
+  - **Firstly / Secondly / Finally** (or similar) are **scaffolding only**. If each section unpacks
+  causes,
+    consequences, or domain reasoning, do **not** treat ordinals as “mechanical organization” that caps the score at 5.
+
+  **Stay at 5** when specificity is high but examples feel interchangeable, the essay is a parade of
+  isolated facts without integrative progression, or the conclusion only restates without deepening.
+
+  **Do not** use “predictable paragraph shape” alone to withhold 6 when the content meets (a)
+  thoughtful selection and (b) coherent progression as above.
+boundary: 5 vs 6
+risk: >-
+  May occasionally award 6 to structurally plain but substantively rich responses — consistent with
+  the rubric.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights: []
+      - code: "60"
+        text: >-
+          The essay is related to the assigned prompt. A clear and consistent opinion is developed
+          with
+
+          sufficient specific supporting details that are thoughtfully chosen. The content
+          organization is
+
+          coherent and demonstrates a thoughtful progression of ideas.
+        highlights:
+          - thoughtful progression
+          - thoughtfully chosen
+          - progression
+          - thoughtful
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      Concrete scored responses in extracted rationales match taqr ids cited in grounded_in; use
+      them to sanity-check the boundary.
+    references: >-
+      Resolved from grounded_in: data-container/prod/extracted/rationales/osslt/td/6/t437118961.md
+
+      Broader pool pattern: data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md
+      (tpcl/ mirrors).
+
+      Cross-check taqr_id from platform exports; older ids may not resolve here.
+    link: indirect

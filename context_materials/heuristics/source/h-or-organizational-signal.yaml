@@ -1,0 +1,58 @@
+id: h-or-organizational-signal
+description: >
+  When scoring **OR**: visible structure (ordering, paragraphing, lead line) appropriate to the task
+  — especially for news/report style prompts.
+grounded_in: |
+  OR rubrics often include organization alongside content.
+consumes:
+  - or-organisation
+decision: >
+  OR: If organisation is weak and the prompt expects a structured response, do not award the
+
+  highest band. If organisation is clear and content fits the prompt, align upward within the item’s
+  scale.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Uses item-specific OR rubrics; match the rule to the rubric extract for the item window you
+      are scoring.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/strand-rubric-index.json
+      (derived_markdown paths)
+
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-af647cb16015b040.md
+
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-5ca55afd99fd3d9a.md
+
+      …plus the PDF-derived markdown for the live item.
+    link: indirect
+  training_material:
+    high_level: >-
+      EQAO News Report (reading selection) scorer training (wi-1137-sp7-OR.md; “OR: Moustache Toad”,
+      sp7-OR, window 1137). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      reading selection + News Report prompt (≈pp. 2–4); News Report code table (≈pp. 5–6);
+      “Anchors” intro (p. 7); scored anchors (e.g. Code I ≈pp. 8–9; Code 10 exemplars from ≈p. 13);
+      “Training Responses” (from ≈p. 28).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1137-sp7-OR.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1138-sp7-OR.md,
+      data-container/prod/extracted/training-materials/guides/wi-1139-sp7-OR.md,
+      data-container/prod/extracted/training-materials/guides/wi-1140-sp7-OR.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/or/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

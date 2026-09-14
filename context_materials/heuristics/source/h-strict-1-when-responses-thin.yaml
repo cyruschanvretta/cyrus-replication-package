@@ -1,0 +1,77 @@
+id: h-strict-1-when-responses-thin
+description: >
+  When the response is ultra-brief and offers no elaborated reasoning move, prefer score 1 over 2
+  even if the topic is named correctly.
+grounded_in: >
+  Operational AI2_EX1: model sometimes credits minimal text as “limited development” while experts
+  treat it as fundamentally insufficient.
+consumes:
+  - td-minimal-length-band
+  - td-analytic-link-present
+  - td-depth-vs-surface
+decision: |
+  Ultra-brief = under 40 words total. If ultra-brief AND no analytic link
+  AND reasoning not developed beyond a label → cap at 1.
+  40+ words with 2+ distinct points and any attempt at explanation
+  (even thin/circular) → at least 2, not 1.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Direct tie to Opinion Essay Topic Development codes I and 10: ultra-brief work with no real support or
+      structure stays in band 10 (or I), not 20, when the model over-credits thin text. Excerpts below are
+      verbatim from rubric-b29afc2906ecf0b9.json; only heuristic-aligned phrases are highlighted.
+    rubric_excerpts:
+      - code: I
+        text: |-
+          • an opinion with no ideas or details (e.g., “yes” or “no” followed by the restatement of the prompt,
+          or just a “yes” or “no” answer)
+        highlights:
+          - opinion with no ideas or details
+          - restatement of the prompt
+      - code: "10"
+        text: |-
+          The essay is related to the prompt but does not express an opinion.
+          or
+          The essay expresses an opinion with ideas but no supporting details, or it provides details
+          unrelated to the opinion. There is no evidence of content organization.
+        highlights:
+          - no supporting details
+          - no evidence of content organization
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes I and 10–60 (Opinion Essay Topic Development).
+    link: direct
+  training_material:
+    high_level: >-
+      Warm Place TD deck (wi-1129-sp8-TD): treat Code 10 anchors—minimal opinion, no real support, no
+      structure—as the calibration target for “still a 10,” and contrast with Code 20 anchors where some
+      development appears. Training Responses scored 10 illustrate thin work that must not be bumped to 20
+      just because the prompt topic is named.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      grounded_in cites operational disagreement (AI2_EX1), not a taqr_id—use Code 10 annotated anchors in
+      wi-1129 as the stand-in exemplar set until specific rationale files are linked. When you attach taqrs,
+      prefer responses experts scored 10 for “minimal / no development” that the model treated as 20.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

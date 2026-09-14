@@ -1,0 +1,97 @@
+id: h-td-laundry-list-penalty
+description: >-
+  Corrects the error where the model assigns Band 4 or 5 to responses that merely list concrete
+  nouns (e.g., 'sports, reading, writing') without providing any causal or consequence-based
+  explanation. The model currently sees 'nouns = specificity' and ignores 'lack of linkage'.
+grounded_in: >-
+  taqr 430254766: Model saw 'small towns' and assigned 4; taqr 429998350: Model saw 'reading,
+  writing' and assigned 4; taqr 435220932: Model saw 'leader' and assigned 4.
+consumes:
+  - td-laundry-list-detection
+  - td-noun-expansion-ratio
+  - feature-analytic-glue-density
+decision: >-
+  Before assigning a score of 4 or 5, you MUST perform a 'Linkage Audit' on all identified nouns in
+  `td-laundry-list-detection`. 
+
+
+  If the student provides a list of items (e.g., 'reading, writing, and sports') where the only
+  connection between the items is a conjunction (and, also, as well as) and there is NO intervening
+  verb of consequence (e.g., 'leads to', 'helps', 'results in'), you MUST cap the score at 2. 
+
+
+  Do NOT allow a 'laundry list' of nouns to satisfy the 'sufficient supporting details' requirement
+  for Band 4. A Band 4 requires that the details are not just present, but are 'supported'. If
+  `td-noun-expansion-ratio` is low (close to 1.0), the response is a list, not an argument. 
+
+
+  Example of what NOT to score as 4: 'A leader helps with reading, writing, and sports.' (This is a
+  list of tasks, not an argument). 
+
+  Example of what TO score as 4: 'A leader helps with reading, which improves literacy, and sports,
+  which builds teamwork.'
+boundary: 2 vs 4
+risk: Could under-score Band 4 responses that have very short but valid links.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "40"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          supporting details; however, only some are specific. The content organization is
+          mechanical, and
+
+          any lapses do not distract from the overall communication.
+        highlights: []
+      - code: "50"
+        text: >-
+          The essay is related to the prompt. A clear and consistent opinion is developed with
+          sufficient
+
+          specific supporting details. The content organization is logical.
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      Concrete scored responses in extracted rationales match taqr ids cited in grounded_in; use
+      them to sanity-check the boundary.
+    references: >-
+      Resolved from grounded_in: data-container/prod/extracted/rationales/osslt/td/2/t429998350.md
+
+      Broader pool pattern: data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md
+      (tpcl/ mirrors).
+
+      Cross-check taqr_id from platform exports; older ids may not resolve here.
+    link: indirect

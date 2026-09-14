@@ -1,0 +1,58 @@
+id: h-cv-systemic-penalty-2-vs-3
+description: >-
+  Corrects the error where the model awards Band 3 to texts with frequent, recurring errors. In the 2 vs 3 boundary, the
+  model must distinguish between 'distracting' errors (Band 3) and 'systemic/recurring' errors (Band 2). If the same
+  error type (e.g., subject-name agreement, gender/number) appears in multiple distinct parts of the text, the score
+  must be capped at 2.
+grounded_in: >-
+  Grounded in taqr_ids: 445958345, 160901254
+
+  For 445958345, the model ignored the recurrence of subject-verb and gender/number errors; for 160901254, it ignored
+  the frequency of capitalization and punctuation errors.
+consumes:
+  - cv-error-recurrence-density
+  - cv-error-band
+decision: >-
+  Identify the 'error type' of the most frequent mistakes. If you detect the same grammatical or mechanical error
+  pattern (e.g., 'je peut' followed by 'je vas', or 'un aspect belle' followed by 'les grande ville') occurring in at
+  least three different locations in the text, you MUST assign a score of 2. 
+
+
+  Band 3 is for 'distracting' errors that are local or occasional. Band 2 is for 'systemic' errors that show a lack of
+  fundamental control. 
+
+
+  Test: Scan the text for repeated patterns of error. If the error is 'local' (one-off), allow a 3. If the error is
+  'recurring' (patterned), assign a 2. 
+
+
+  Example: 'He go to school. She go to school.' (Score 2 due to recurring subject-verb error). 'He go to school. He is
+  happy.' (Score 3 as the error is isolated). 
+
+
+  Guardrail: Do not penalize for simple spelling typos that occur only once.
+boundary: 2 vs 3
+risk: Could penalize a student who makes a single, repeated typo (e.g., misspelling the same word twice) as 'systemic'.
+sme_traceability:
+  training_material:
+    high_level: >-
+      EQAO Conventions (sp9-CV) scorer training — meaning-focused scoring and sentence-structure impact
+      inform recurring-error vs local-error judgment at the 2 vs 3 boundary.
+    references: >-
+      data-container/prod/extracted/training-materials/guides/wi-1130-sp9-CV.md (sibling windows 1132, 1134, 1136).
+
+      Canonical excerpts: data-container/prod/extracted/training-materials/cv-scorer-training-elements.yaml
+    link: indirect
+    training_element_ids:
+      - cv-train-first-draft-reminder
+      - cv-train-td-decoupling
+      - cv-train-page5-control-what-it-looks-like
+      - cv-train-page6-sentence-structure-syntax
+      - cv-train-page7-common-errors-runon-comma-fragments
+      - cv-train-page8-spelling-scoring-reminders
+      - cv-train-page9-spelling-commonly-misspelled
+      - cv-train-page10-usage-incorrect-examples
+      - cv-train-page11-grammar-pronouns-and-agreement
+      - cv-train-page12-grammar-tense-adverb-article-verbform
+      - cv-train-page13-punctuation-expectations
+      - cv-train-page15-classification-descriptors

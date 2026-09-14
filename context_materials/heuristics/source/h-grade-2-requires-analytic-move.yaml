@@ -1,0 +1,87 @@
+id: h-grade-2-requires-analytic-move
+description: >
+  Assign 2 only when there is at least one identifiable reasoning move beyond naming the topic — a
+  because-clause, contrast, or example with a tie-back — not merely length or list formatting.
+grounded_in: >
+  Separates borderline 1 vs 2: experts often reserve 2 for some attempt at explanation; pure
+  assertion without analytic glue should not reach 2 on extended tasks.
+consumes:
+  - td-analytic-link-present
+  - td-staged-reasoning
+  - td-claim-evidence-wiring
+decision: |
+  Before assigning 2, confirm at least one of: explicit causal/temporal link,
+  mini-example with relevance, or contrast between two ideas. If absent and the
+  response is not a valid exception case, use 1.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "20"
+        text: >-
+          The essay is related to the prompt, but only part of the response expresses and supports
+          an
+
+          opinion.
+
+          or
+
+          The essay is related to the prompt and expresses and supports an opinion, but the opinion
+          is
+
+          unclear or inconsistent. The connection between the ideas and details and the opinion is
+          not always
+
+          evident. There are insufficient supporting details: too few or repetitious. There is
+          limited evidence
+
+          of content organization.
+        highlights: []
+      - code: "30"
+        text: >-
+          The essay is related to the prompt and expresses a clear opinion. There are insufficient
+          and/or
+
+          vague supporting details or the connection of the details to the opinion is not always
+          clear. There is
+
+          evidence of content organization, but lapses distract from the overall communication
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      No rationales auto-resolved from ids in grounded_in; exemplar backtrace is the generic pool
+      location until cases are linked.
+    references: |-
+      data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md (tpcl/ mirrors).
+      Cross-check taqr_id from platform exports; older ids in grounded_in may not resolve here.
+    link: weak

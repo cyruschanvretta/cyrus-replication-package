@@ -1,0 +1,119 @@
+id: h-td-int003-mid-range-floor
+description: |
+  Handles 2↔3 and 3↔4 boundaries with sentence-count tests.
+grounded_in: |
+  Intervention 003. 2→3: taqr 279934460. 3→4: taqr 429198193, 429395281, 161760170.
+consumes:
+  - td-elaboration-per-move
+  - td-multi-axis-argument
+decision: |
+  TD: FLOOR CHECK — boundaries 2↔3 and 3↔4
+
+  BEFORE FINALIZING 2:
+  If response has 2+ distinct points AND paragraphing AND is 100+ words →
+  at least band 3. Under 100 words → floor does NOT apply.
+
+  BEFORE SCORING 4 — PARAGRAPH STRUCTURE CHECK (mandatory):
+  If the response has ZERO line breaks between sentences (one
+  continuous block with no paragraph breaks at all), cap at 3.
+  Grouped points (e.g. "Third... Fourth..." in one paragraph)
+  DO count as paragraphing if other paragraph breaks exist.
+
+  WORD COUNT CHECK (mandatory, apply before sentence counting):
+  If the response is under 200 words → BAND 3 maximum. Do NOT
+  score 4 regardless of paragraph structure. Short responses lack
+  the substance for "sufficient details."
+
+  If 200+ words AND paragraphing present, count content sentences
+  per body paragraph (exclude the topic sentence):
+  - Most paragraphs have 2+ content sentences → band 4.
+  - One thin paragraph OK if another has 3+ sentences → band 4.
+  - ALL paragraphs have 0-1 content sentences → stays at band 3.
+
+  CONTRASTIVE EXAMPLES:
+  BAND 3: "Firstly, the heat can give you sunburn. Secondly, you need
+  cold for snowmobiling. Thirdly, I like different seasons." (Each
+  point is 1 sentence = bare assertions. Under 200 words.)
+  BAND 4: "You can handle cold by dressing up with warmer clothing,
+  something you can't do in hotter climates. In hotter places you
+  begin to sweat more often. You put in more effort getting by the
+  heat." (Each paragraph has 2+ content sentences beyond the topic.)
+
+  Do NOT use "naming"/"developing" for 3↔4 — those are 4↔5 terms.
+  Do NOT penalize grammar/spelling.
+sme_traceability:
+  rubric:
+    high_level: >-
+      Anchored to the Topic Development (WR-EXT / OSSLT) scale—opinion, specificity of support, and
+      organization.
+    references: >-
+      data-container/prod/extracted/item-type-rubrics/generated/derived-text/rubric-b29afc2906ecf0b9.md
+
+      Platform verbatim descriptors for codes 10–60.
+    link: direct
+    rubric_excerpts:
+      - code: "20"
+        text: >-
+          The essay is related to the prompt, but only part of the response expresses and supports
+          an
+
+          opinion.
+
+          or
+
+          The essay is related to the prompt and expresses and supports an opinion, but the opinion
+          is
+
+          unclear or inconsistent. The connection between the ideas and details and the opinion is
+          not always
+
+          evident. There are insufficient supporting details: too few or repetitious. There is
+          limited evidence
+
+          of content organization.
+        highlights: []
+      - code: "30"
+        text: >-
+          The essay is related to the prompt and expresses a clear opinion. There are insufficient
+          and/or
+
+          vague supporting details or the connection of the details to the opinion is not always
+          clear. There is
+
+          evidence of content organization, but lapses distract from the overall communication
+        highlights: []
+  training_material:
+    high_level: >-
+      EQAO Opinion Essay Topic Development scorer training (wi-1129-sp8-TD.md; “LW: Warm Place
+      (TD)”, sp8-TD, window 1129). Calibrate with the rubric slides, annotated Anchors by code, and
+      unannotated Training Responses in that deck.
+    references: >-
+      Printed PDF page numbers in the extracted guide (EQAO footer):
+
+      session outline + opinion prompt (≈pp. 2–6); TD rubric / code descriptors (≈pp. 7–8);
+      “Anchors” intro (p. 9) and “Arguing Both Sides” (p. 10); annotated exemplars by code (e.g.
+      Code 10: three anchors on pp. 13–16); unannotated “Training Responses” with scored follow-on
+      pages (from ≈p. 36).
+
+
+      data-container/prod/extracted/training-materials/
+
+      Primary guide: data-container/prod/extracted/training-materials/guides/wi-1129-sp8-TD.md
+
+      Additional windows (same item type):
+      data-container/prod/extracted/training-materials/guides/wi-1131-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1133-sp8-TD.md,
+      data-container/prod/extracted/training-materials/guides/wi-1135-sp8-TD.md, …
+    link: indirect
+  exemplar_selection:
+    high_level: >-
+      Concrete scored responses in extracted rationales match taqr ids cited in grounded_in; use
+      them to sanity-check the boundary.
+    references: >-
+      Resolved from grounded_in: data-container/prod/extracted/rationales/osslt/td/4/t161760170.md
+
+      Broader pool pattern: data-container/prod/extracted/rationales/osslt/td/<band>/t<taqr_id>.md
+      (tpcl/ mirrors).
+
+      Cross-check taqr_id from platform exports; older ids may not resolve here.
+    link: indirect
