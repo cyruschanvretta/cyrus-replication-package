@@ -31,6 +31,31 @@ def build_payload(messages: list[dict[str, str]], model: dict[str, Any], mode: s
     }
 
 
+def build_converse_request(messages: list[dict[str, str]], model: dict[str, Any]) -> dict[str, Any]:
+    """Translate provider-neutral chat messages into Bedrock Converse arguments.
+
+    Converse carries system instructions outside the turn list, so the system
+    message is hoisted rather than sent with a "system" role.
+    """
+    system: list[dict[str, str]] = []
+    turns: list[dict[str, Any]] = []
+    for message in messages:
+        if message.get("role") == "system":
+            system.append({"text": message.get("content", "")})
+            continue
+        turns.append({"role": message.get("role", "user"), "content": [{"text": message.get("content", "")}]})
+    request: dict[str, Any] = {
+        "messages": turns,
+        "inferenceConfig": {
+            "temperature": float(model.get("temperature", 0)),
+            "maxTokens": int(model.get("max_tokens", 80)),
+        },
+    }
+    if system:
+        request["system"] = system
+    return request
+
+
 def extract_text(value: Any) -> str:
     if isinstance(value, str):
         return value
@@ -38,10 +63,18 @@ def extract_text(value: Any) -> str:
         return extract_text(value[0])
     if not isinstance(value, dict):
         raise ValueError(f"Unsupported model response type: {type(value).__name__}")
+    nested = value.get("output")
+    if isinstance(nested, (dict, list)) and nested:
+        return extract_text(nested)
+    message = value.get("message") if isinstance(value.get("message"), dict) else None
+    if message is not None and isinstance(message.get("content"), list) and message["content"]:
+        return extract_text(message["content"])
+    if isinstance(value.get("content"), list) and value["content"]:
+        return extract_text(value["content"])
     candidates = [
         value.get("generated_text"),
         value.get("text"),
-        (value.get("message") or {}).get("content") if isinstance(value.get("message"), dict) else None,
+        (message or {}).get("content"),
         (value.get("generation") or {}).get("content") if isinstance(value.get("generation"), dict) else None,
     ]
     choices = value.get("choices")
@@ -87,6 +120,35 @@ class SageMakerAdapter:
             Body=json.dumps(payload).encode("utf-8"),
         )
         return extract_text(json.loads(response["Body"].read().decode("utf-8")))
+
+
+@dataclass
+class BedrockAdapter:
+    """Amazon Bedrock Converse transport; no dedicated endpoint is required."""
+
+    model: dict[str, Any]
+
+    def __post_init__(self) -> None:
+        import boto3
+        from botocore.config import Config
+
+        settings = self.model.get("bedrock", {})
+        model_id_env = settings.get("model_id_env", "BEDROCK_MODEL_ID")
+        self.model_id = os.environ.get(model_id_env, "") or (settings.get("model_id") or "")
+        if not self.model_id:
+            raise ValueError(f"Environment variable {model_id_env} is required")
+        region = os.environ.get(settings.get("region_env", "AWS_REGION"))
+        timeout = self.model.get("timeout_seconds", 120)
+        client_config = Config(
+            connect_timeout=timeout,
+            read_timeout=timeout,
+            retries={"mode": "standard", "max_attempts": settings.get("botocore_max_attempts", 3)},
+        )
+        self.client = boto3.client("bedrock-runtime", region_name=region or None, config=client_config)
+
+    def invoke(self, messages: list[dict[str, str]]) -> str:
+        response = self.client.converse(modelId=self.model_id, **build_converse_request(messages, self.model))
+        return extract_text(response)
 
 
 @dataclass
@@ -173,7 +235,9 @@ class MockAdapter:
 
 
 def build_adapter(model: dict[str, Any], override: str | None = None) -> ModelAdapter:
-    name = override or model.get("adapter", "sagemaker")
+    name = override or model.get("adapter", "bedrock")
+    if name == "bedrock":
+        return BedrockAdapter(model)
     if name == "sagemaker":
         return SageMakerAdapter(model)
     if name == "http":

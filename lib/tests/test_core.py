@@ -5,7 +5,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 LIB = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(LIB))
@@ -13,7 +13,13 @@ sys.path.insert(0, str(LIB))
 from awe_scoring.config import load_config, package_root
 from awe_scoring.estimators import ScoreVotingClassifier, build_estimator
 from awe_scoring.evaluation import evaluate
-from awe_scoring.model_adapters import OllamaAdapter, extract_text
+from awe_scoring.model_adapters import (
+    BedrockAdapter,
+    OllamaAdapter,
+    build_adapter,
+    build_converse_request,
+    extract_text,
+)
 from awe_scoring.pipeline import process_rows
 from awe_scoring.profiles import parse_profile, profile_features
 from awe_scoring.routing import hard_gate, route_key, score_to_range
@@ -46,6 +52,8 @@ class ProfileTests(unittest.TestCase):
         self.assertEqual(extract_text([{"generated_text": "I2"}]), "I2")
         self.assertEqual(extract_text({"choices": [{"message": {"content": "I2"}}]}), "I2")
         self.assertEqual(extract_text({"message": {"role": "assistant", "content": "I2"}}), "I2")
+        converse = {"output": {"message": {"role": "assistant", "content": [{"text": "I2"}]}}}
+        self.assertEqual(extract_text(converse), "I2")
 
     def test_explicit_ollama_model_wins_over_environment(self) -> None:
         config = load_config()["model"]
@@ -53,6 +61,41 @@ class ProfileTests(unittest.TestCase):
         config["ollama"]["_explicit_model_override"] = True
         with patch.dict("os.environ", {"AWE_OLLAMA_MODEL": "qwen2.5:3b"}):
             self.assertEqual(OllamaAdapter(config).model_name, "gemma4:e4b")
+
+
+class BedrockAdapterTests(unittest.TestCase):
+    def test_system_message_is_hoisted_out_of_turns(self) -> None:
+        model = load_config()["model"]
+        messages = [{"role": "system", "content": "rubric"}, {"role": "user", "content": "response"}]
+        request = build_converse_request(messages, model)
+        self.assertEqual(request["system"], [{"text": "rubric"}])
+        self.assertEqual(request["messages"], [{"role": "user", "content": [{"text": "response"}]}])
+        self.assertEqual(request["inferenceConfig"], {"temperature": 0.0, "maxTokens": 80})
+
+    def test_system_key_omitted_when_absent(self) -> None:
+        request = build_converse_request([{"role": "user", "content": "response"}], {})
+        self.assertNotIn("system", request)
+
+    def test_model_id_from_environment_and_required(self) -> None:
+        model = load_config()["model"]
+        with patch("boto3.client") as client:
+            with patch.dict("os.environ", {"BEDROCK_MODEL_ID": "us.anthropic.claude-test"}):
+                self.assertEqual(BedrockAdapter(model).model_id, "us.anthropic.claude-test")
+                self.assertIsInstance(build_adapter(model), BedrockAdapter)
+            self.assertTrue(client.called)
+        with patch.dict("os.environ", {"BEDROCK_MODEL_ID": ""}):
+            with self.assertRaises(ValueError):
+                BedrockAdapter(model)
+
+    def test_invoke_returns_converse_text(self) -> None:
+        model = load_config()["model"]
+        stub = Mock()
+        stub.converse.return_value = {"output": {"message": {"role": "assistant", "content": [{"text": "I2|R2"}]}}}
+        with patch("boto3.client", return_value=stub):
+            with patch.dict("os.environ", {"BEDROCK_MODEL_ID": "us.anthropic.claude-test"}):
+                adapter = BedrockAdapter(model)
+        self.assertEqual(adapter.invoke([{"role": "user", "content": "response"}]), "I2|R2")
+        self.assertEqual(stub.converse.call_args.kwargs["modelId"], "us.anthropic.claude-test")
 
 
 class ArchitectureTests(unittest.TestCase):

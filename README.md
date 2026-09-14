@@ -6,9 +6,10 @@ Place Cyrus's response files in `responses/` and keep generated artifacts outsid
 that folder.
 
 The recommended default model for routes that require an LLM is **Gemma 3 12B
-Instruct**. The runtime is provider-neutral: the model may be supplied through an
-AWS SageMaker endpoint, a generic HTTP chat endpoint, local Ollama, or a Python
-callable. The two deterministic routes do not invoke the model.
+Instruct**. The runtime is provider-neutral: the model may be supplied through
+AWS Bedrock, an AWS SageMaker endpoint, a generic HTTP chat endpoint, local
+Ollama, or a Python callable. The two deterministic routes do not invoke the
+model.
 
 `MANIFEST.json` records the package file inventory and SHA-256 hashes. Rebuild
 it after an intentional handoff edit with
@@ -23,8 +24,11 @@ the pinned virtual environment:
 python lib/dependencies/initialize.py
 ```
 
-1. Copy `.env.example` to `.env` and configure the selected adapter. For
-   SageMaker, set `AWE_SAGEMAKER_ENDPOINT` and `AWS_REGION`.
+1. Copy `.env.example` to `.env` and configure the selected adapter. The default
+   adapter is Bedrock: set `BEDROCK_MODEL_ID`, `AWS_REGION`, and either
+   `AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY` or an instance role or profile.
+   For SageMaker instead, set `model.adapter: sagemaker`,
+   `AWE_SAGEMAKER_ENDPOINT`, and `AWS_REGION`.
 2. Add labelled JSONL to `responses/replication.jsonl`; see
    `docs/06-input-output-contracts.md`.
 3. Extract deterministic and LLM features once:
@@ -45,7 +49,7 @@ python lib/dependencies/initialize.py
    .venv/Scripts/python lib/scripts/run.py --input responses/new.jsonl --output artifacts/new-scores.jsonl --model-bundle artifacts/models.joblib
    ```
 
-For a local Ollama smoke test, add `--adapter ollama`. Use
+For a fully offline run with no AWS account, add `--adapter ollama`. Use
 `--model-name gemma3:12b` to override the local tag and `--concurrency 1` on a
 memory-constrained workstation.
 

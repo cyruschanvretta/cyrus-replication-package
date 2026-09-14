@@ -10,8 +10,11 @@ from pathlib import Path
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_PATH = PACKAGE_ROOT / "MANIFEST.json"
-EXCLUDED_PARTS = {"__pycache__", ".pytest_cache"}
-EXCLUDED_NAMES = {OUTPUT_PATH.name}
+# VCS internals plus the paths .gitignore excludes: machine-local and generated
+# files never ship with the handoff, so hashing them would make the manifest
+# non-deterministic across workstations.
+EXCLUDED_PARTS = {"__pycache__", ".pytest_cache", ".venv", ".git", "artifacts"}
+EXCLUDED_NAMES = {OUTPUT_PATH.name, ".env"}
 
 
 def sha256(path: Path) -> str:

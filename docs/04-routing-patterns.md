@@ -33,9 +33,14 @@ word count when necessary.
 
 ## Model transport routes
 
-`sagemaker` is the deployment-oriented default. It invokes a named SageMaker
-runtime endpoint and supports either a chat-message payload or a TGI-style
-prompt payload. Endpoint name and region come from environment variables.
+`bedrock` is the default. It calls the Amazon Bedrock Converse API, which
+normalizes one request and response shape across model vendors, so no payload
+mode has to be chosen. Model id, region, and credentials come from environment
+variables; there is no endpoint to provision.
+
+`sagemaker` invokes a named SageMaker runtime endpoint and supports either a
+chat-message payload or a TGI-style prompt payload. Endpoint name and region
+come from environment variables.
 
 `http` sends the same provider-neutral request to a configured HTTPS endpoint.
 An optional bearer token is read from an environment variable.

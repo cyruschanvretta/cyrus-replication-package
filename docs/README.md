@@ -7,4 +7,4 @@
 - `05-known-strengths.md`: evidence-backed strengths and limitations.
 - `06-input-output-contracts.md`: JSONL and compact-profile schemas.
 - `07-replication-protocol.md`: strict experimental procedure.
-- `08-deployment.md`: SageMaker, HTTP, and callable deployment.
+- `08-deployment.md`: Bedrock, SageMaker, HTTP, Ollama, and callable deployment.

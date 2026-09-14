@@ -26,12 +26,25 @@ def load_env(path: Path) -> None:
         os.environ.setdefault(name.strip(), value.strip())
 
 
+def resolve_model_family(model: dict, adapter_name: str) -> str:
+    """Report the model an adapter actually serves.
+
+    Transports whose deployed model is not the package default declare their own
+    `model_family`; Bedrock needs this because an inference profile ARN does not
+    name the model it routes to.
+    """
+    settings = model.get(adapter_name)
+    if isinstance(settings, dict) and settings.get("model_family"):
+        return str(settings["model_family"])
+    return str(model["recommended_family"])
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Extract four-quadrant features and optionally score with a fitted bundle")
     parser.add_argument("--input", required=True)
     parser.add_argument("--output", required=True)
     parser.add_argument("--config")
-    parser.add_argument("--adapter", choices=["sagemaker", "http", "ollama", "callable", "mock"])
+    parser.add_argument("--adapter", choices=["bedrock", "sagemaker", "http", "ollama", "callable", "mock"])
     parser.add_argument("--model-name", help="Deployment or local-runtime model name override")
     parser.add_argument("--concurrency", type=int, help="Concurrent response workers")
     parser.add_argument("--model-bundle")
@@ -49,6 +62,7 @@ def main() -> int:
             parser.error("--concurrency must be at least 1")
         config["model"]["concurrency"] = args.concurrency
     rows = read_jsonl(args.input)
+    adapter_name = args.adapter or config["model"]["adapter"]
     started = datetime.now(timezone.utc)
     status = "inconclusive"
     try:
@@ -69,8 +83,8 @@ def main() -> int:
             "config_sha256": sha256_file(config["_path"]),
             "context_sha256": context_digest(root),
             "n": len(rows),
-            "model_family": config["model"]["recommended_family"],
-            "adapter": args.adapter or config["model"]["adapter"],
+            "model_family": resolve_model_family(config["model"], adapter_name),
+            "adapter": adapter_name,
             "concurrency": config["model"]["concurrency"],
             "model_bundle": str(Path(args.model_bundle).resolve()) if args.model_bundle else None,
             "output": str(Path(args.output).resolve()),

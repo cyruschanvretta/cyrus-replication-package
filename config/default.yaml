@@ -3,12 +3,22 @@ seed: 20260913
 
 model:
   recommended_family: gemma-3-12b-it
-  adapter: ollama
+  adapter: bedrock
   temperature: 0
   max_tokens: 80
   timeout_seconds: 120
-  concurrency: 12
+  concurrency: 5
   retries: 4
+  bedrock:
+    model_id_env: BEDROCK_MODEL_ID
+    region_env: AWS_REGION
+    # Optional literal fallback used only when the environment variable is unset.
+    model_id: null
+    # The model actually served by BEDROCK_MODEL_ID. An inference profile ARN is
+    # opaque, so this is what the run manifest records instead of the
+    # package-wide recommended_family above.
+    model_family: meta.llama3-70b-instruct-v1:0
+    botocore_max_attempts: 3
   sagemaker:
     endpoint_name_env: AWE_SAGEMAKER_ENDPOINT
     region_env: AWS_REGION

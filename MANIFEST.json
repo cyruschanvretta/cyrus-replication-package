@@ -3,12 +3,12 @@
   "recommended_llm": "Gemma 3 12B Instruct",
   "provider_neutral": true,
   "responses_directory_expected_empty": true,
-  "file_count": 148,
+  "file_count": 156,
   "files": [
     {
       "path": ".env.example",
-      "bytes": 283,
-      "sha256": "60f1170c6f738e8fa29260e735a67efd5cefe738c7570c589d6a07262e0beada"
+      "bytes": 569,
+      "sha256": "6735c8a56144dc52ac6bf6792f77fedbc24653e7542e5b9bd0e7ccd994b69516"
     },
     {
       "path": ".gitignore",
@@ -17,8 +17,8 @@
     },
     {
       "path": "config/default.yaml",
-      "bytes": 1934,
-      "sha256": "5b94ca7b29fabe5ff4706b18b26fe40d25e28f6e93a36b8d318f700d1b3de511"
+      "bytes": 2378,
+      "sha256": "6507700c2e0f92d196af0b110cfd52363754cbfcb9bcde1a3d358eb3a6a07210"
     },
     {
       "path": "context_materials/feature_contracts/english-cv.json",
@@ -602,8 +602,8 @@
     },
     {
       "path": "docs/04-routing-patterns.md",
-      "bytes": 2686,
-      "sha256": "5db1e4b8ffed8635c3906a2b35871512a649624986902916943ecc89c08ea75d"
+      "bytes": 2925,
+      "sha256": "bfc228fdd6bf8502ca2b069569f74605fcde7b54c8f7be05a3a7c696a852dc38"
     },
     {
       "path": "docs/05-known-strengths.md",
@@ -622,8 +622,8 @@
     },
     {
       "path": "docs/08-deployment.md",
-      "bytes": 2242,
-      "sha256": "e39348c51e469f996f9bd963813e8d1a350e784c739a57ede403bd2dc9f85639"
+      "bytes": 4518,
+      "sha256": "d8a71b691df4bd1c1ded5cde85ecc3e5fc1d5b4b891bf2b2201fd95c16f1ebb5"
     },
     {
       "path": "docs/approaches/english-cv.md",
@@ -647,8 +647,8 @@
     },
     {
       "path": "docs/README.md",
-      "bytes": 582,
-      "sha256": "77b5608f699870fbad6d31182edc500fc79ec6fce27aa718002038ff1e7c28d6"
+      "bytes": 599,
+      "sha256": "0b9833086156edb6d722b1a08304564154eb222091ba5a26f5fc4a8417f0d83e"
     },
     {
       "path": "lib/awe_scoring/__init__.py",
@@ -682,8 +682,8 @@
     },
     {
       "path": "lib/awe_scoring/model_adapters.py",
-      "bytes": 7945,
-      "sha256": "f14a7f3a5d31bc631bfb8165b37a4eb4e7689046952d2804216ee9aeba8d3bdd"
+      "bytes": 10609,
+      "sha256": "1a5982a2a42ddd6566bb254815f5f419ffbfed032c83f71f2d0c7c893c2cbd3c"
     },
     {
       "path": "lib/awe_scoring/pipeline.py",
@@ -702,8 +702,8 @@
     },
     {
       "path": "lib/dependencies/build_manifest.py",
-      "bytes": 1574,
-      "sha256": "5d7bd130c0e23ac0f2ee54872dae5a568fdf2b80afd0ce9c433490eb99be7d7f"
+      "bytes": 1810,
+      "sha256": "fe82a5f0021b26c8e0b15630f9fb0b24a3e21b5e55a742c8fd82aaa927659bb3"
     },
     {
       "path": "lib/dependencies/export_feature_contracts_from_source.py",
@@ -727,8 +727,8 @@
     },
     {
       "path": "lib/scripts/run.py",
-      "bytes": 3302,
-      "sha256": "adf08773f4c60c4ed9bd4e9e1467a4f2317f1a2be975bdb75a56f0c8cce54028"
+      "bytes": 3878,
+      "sha256": "0a50339706b6c57e72a976737392e04bf65512b6d5628aca6d7c54315a254273"
     },
     {
       "path": "lib/tests/fixtures/smoke.jsonl",
@@ -737,13 +737,53 @@
     },
     {
       "path": "lib/tests/test_core.py",
-      "bytes": 5010,
-      "sha256": "e64a2869a3ee512b28b928ad31502046f6d4939d387af4041f7d0bdac000124e"
+      "bytes": 7240,
+      "sha256": "06185bf8e30dfda8ed7268d1a9193e08faf4202afb21493ce916f94eb696fe2a"
     },
     {
       "path": "README.md",
-      "bytes": 2717,
-      "sha256": "15ba236ff7e9c2d754302eb1d908e77e859d32940fcfb3ec095c829c138d3387"
+      "bytes": 2947,
+      "sha256": "9c55914777181f9ba37d0dcd5a915dfc38297e69d24992b7b1cb4b6005a6e7fd"
+    },
+    {
+      "path": "responses/replication-expert-cv.jsonl",
+      "bytes": 801552,
+      "sha256": "d417ecc8e06cd60c8720504fb1af9a4772bba416bbc6833ae68eb224f273cf30"
+    },
+    {
+      "path": "responses/replication-expert-td.jsonl",
+      "bytes": 714003,
+      "sha256": "de378423990d66c13ed051a3dc4e5446ab534fdb9ad9d78cd7d44a418f69a4bd"
+    },
+    {
+      "path": "responses/replication-testing-cv.jsonl",
+      "bytes": 5330004,
+      "sha256": "52ea775c4bdc3aac0e9eb102fd96dedcb54badd11b60a768b384fe5a263315cb"
+    },
+    {
+      "path": "responses/replication-testing-td.jsonl",
+      "bytes": 5330004,
+      "sha256": "d48779ed9f1290a9c2533c4a9f6d96719842d5038a8c9c2705b07dc2efbbeb7f"
+    },
+    {
+      "path": "responses/replication-training-cv.jsonl",
+      "bytes": 24718304,
+      "sha256": "985e20861cf7ac026b575d9304cc8bc20f22aa24d3466917c37125d68f647b3a"
+    },
+    {
+      "path": "responses/replication-training-td.jsonl",
+      "bytes": 24718304,
+      "sha256": "ce305df6bd1453e1ddd15dc81c8b9b93797007479f32fd5a3130a9e77a141bf6"
+    },
+    {
+      "path": "responses/replication-validation-cv.jsonl",
+      "bytes": 5273761,
+      "sha256": "c1bff41982b4547a6ead784fc3702083b0293eae8b7c6117e44e1f528efbf143"
+    },
+    {
+      "path": "responses/replication-validation-td.jsonl",
+      "bytes": 5273761,
+      "sha256": "45ae9097f53cdf97a1c669ac0af0a0abaeb481b9149daab378e1185fa28c6885"
     }
   ]
 }
