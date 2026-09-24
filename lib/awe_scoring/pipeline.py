@@ -13,7 +13,7 @@ import numpy as np
 from .features import deterministic_features, error_dispersion
 from .model_adapters import ModelAdapter, build_adapter
 from .profiles import build_messages, parse_profile, profile_features
-from .routing import hard_gate, normalize_language, normalize_skill, route_key, score_to_range
+from .routing import Route, compile_spec, hard_gate, normalize_language, resolve_route
 
 
 def _word_count(features: dict[str, float], text: str) -> int:
@@ -27,8 +27,12 @@ def _align(feature_map: dict[str, float], feature_names: list[str]) -> np.ndarra
     return np.asarray([[float(feature_map.get(name, 0.0)) for name in feature_names]], dtype=float)
 
 
+def _contract_path(route_key_value: str) -> Path:
+    return Path(__file__).resolve().parents[2] / "context_materials/feature_contracts" / f"{route_key_value}.json"
+
+
 def _validate_strict_contract(route_key_value: str, features: dict[str, float], llm_expected: bool) -> None:
-    path = Path(__file__).resolve().parents[2] / "context_materials/feature_contracts" / f"{route_key_value}.json"
+    path = _contract_path(route_key_value)
     contract = json.loads(path.read_text(encoding="utf-8"))
     expected = set(contract["feature_names"])
     actual = set(features)
@@ -45,16 +49,17 @@ def _validate_strict_contract(route_key_value: str, features: dict[str, float], 
 def _profile_once(
     row: dict[str, Any],
     deterministic: dict[str, float],
-    route: dict[str, Any],
+    route: Route,
     adapter: ModelAdapter,
     retries: int,
 ) -> tuple[dict[str, int], int, str]:
-    messages = build_messages(row, deterministic, route)
+    assert route.profile_schema is not None
+    messages = build_messages(row, deterministic, route.settings, route.profile_schema)
     last_error: Exception | None = None
     for attempt in range(1, retries + 1):
         try:
             raw = adapter.invoke(messages)
-            profile = parse_profile(raw, row["skill"], error_dispersion(deterministic))
+            profile = parse_profile(raw, route.profile_schema, error_dispersion(deterministic))
             return profile, attempt, raw.strip().splitlines()[0]
         except Exception as error:
             last_error = error
@@ -81,31 +86,34 @@ def process_rows(
     identifiers = [str(row.get("id", "")) for row in rows]
     if any(not identifier for identifier in identifiers) or len(identifiers) != len(set(identifiers)):
         raise ValueError("Every input row requires a unique non-empty id")
-    routes = config["routes"]
-    needs_llm = any(routes[route_key(row["language"], row["skill"])]["uses_llm"] for row in rows)
+    spec = compile_spec(config)
+    needs_llm = any(resolve_route(spec, row).uses_llm for row in rows)
     adapter = build_adapter(config["model"], adapter_override) if needs_llm else None
     bundle = joblib.load(bundle_path) if bundle_path else None
 
     def work(source: dict[str, Any]) -> dict[str, Any]:
         row = dict(source)
+        route = resolve_route(spec, row)
+        key = route.name
+        skill = route.skill
         row["language"] = normalize_language(row["language"])
-        row["skill"] = normalize_skill(row["skill"])
-        key = route_key(row["language"], row["skill"])
-        route = routes[key]
+        row["skill"] = skill.name
         deterministic = deterministic_features(row, config["deterministic"])
-        hard_score, hard_reason = hard_gate(row, _word_count(deterministic, str(row.get("response_text", ""))))
+        word_count = _word_count(deterministic, str(row.get("response_text", "")))
+        hard_score, hard_reason = hard_gate(spec, route, row, deterministic, word_count)
         profile = None
         accepted_output = None
         attempts = 0
         feature_map = dict(deterministic)
-        if route["uses_llm"] and hard_score is None:
+        if route.uses_llm and hard_score is None:
             assert adapter is not None
             profile, attempts, accepted_output = _profile_once(
                 row, deterministic, route, adapter, int(config["model"].get("retries", 4))
             )
-            feature_map.update(profile_features(row["skill"], profile))
-        if config["deterministic"].get("mode") == "provided":
-            _validate_strict_contract(key, feature_map, bool(route["uses_llm"] and hard_score is None))
+            feature_map.update(profile_features(route.profile_schema, profile))
+        strict = config["deterministic"].get("mode") == "provided"
+        if strict and (_contract_path(key).exists() or "expected_frozen_feature_count" in route.settings):
+            _validate_strict_contract(key, feature_map, route.uses_llm and hard_score is None)
         predicted_score = hard_score
         scoring_source = "hard-gate" if hard_score is not None else "features-only"
         if predicted_score is None and bundle:
@@ -114,6 +122,8 @@ def process_rows(
                 raise ValueError(f"Model bundle has no route {key}")
             shifted = int(fitted["estimator"].predict(_align(feature_map, fitted["feature_names"]))[0])
             predicted_score = shifted + int(fitted["score_min"])
+            if skill.ungated_min_score is not None:
+                predicted_score = max(predicted_score, skill.ungated_min_score)
             scoring_source = "fitted-score-first-model"
         return {
             "id": row["id"],
@@ -128,7 +138,7 @@ def process_rows(
             "accepted_model_output": accepted_output,
             "model_attempts": attempts,
             "stage2_score": predicted_score,
-            "hml": score_to_range(predicted_score, row["skill"]) if predicted_score is not None else None,
+            "hml": skill.to_range(predicted_score) if predicted_score is not None else None,
             "scoring_source": scoring_source,
         }
 

@@ -10,6 +10,14 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
+# Learner names accepted by `routes.<name>.learner`; see build_estimator.
+LEARNERS = (
+    "random_forest_depth4",
+    "cumulative_ordinal_median_c003",
+    "tree_ordinal_median",
+    "tree_ordinal_expected",
+)
+
 
 class CumulativeOrdinalClassifier(BaseEstimator, ClassifierMixin):
     def __init__(self, c: float = 1.0, class_weight: str | None = None, random_state: int = 0):

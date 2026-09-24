@@ -17,4 +17,7 @@ def load_config(path: str | Path | None = None) -> dict[str, Any]:
     if config.get("schema_version") != 1:
         raise ValueError(f"Unsupported config schema in {source}")
     config["_path"] = str(source)
+    from .routing import compile_spec
+
+    compile_spec(config)  # fail fast on an invalid skills/routes/hard_gates configuration
     return config

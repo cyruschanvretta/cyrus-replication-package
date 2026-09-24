@@ -47,6 +47,37 @@ deterministic:
 evaluation:
   save_full_fit_models: true
   bootstrap_samples: 10000
+  # apply_hard_gates is left unset (false): OSSLT/TPCL evaluation fits and
+  # predicts every row, including gated ones, as in the reported experiments.
+
+# Score scale and reporting ranges for each skill. `max` is the highest score
+# (inclusive) in a range; ranges are listed low to high.
+skills:
+  TD:
+    score_values: [0, 1, 2, 3, 4, 5, 6]
+    ranges:
+      - {label: Low, max: 2}
+      - {label: Medium, max: 4}
+      - {label: High, max: 6}
+  CV:
+    score_values: [0, 1, 2, 3, 4]
+    ranges:
+      - {label: Low, max: 1}
+      - {label: Medium, max: 3}
+      - {label: High, max: 4}
+
+# Evaluated in order before any model call; the first match fixes the score.
+hard_gates:
+  - name: blank-or-non-linguistic
+    score: 0
+    when:
+      any:
+        - {field: is_linguistic, equals: false}
+        - {field: response_text, blank: true}
+  - name: cv-under-30-authored-words
+    score: 1
+    skills: [CV]
+    when: {measure: word_count, lt: 30}
 
 routes:
   english-td:

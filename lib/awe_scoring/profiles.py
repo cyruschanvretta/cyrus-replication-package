@@ -33,6 +33,9 @@ CV_MODEL_FIELDS = [
     ("C", "control consistency", ("unstable throughout", "uneven", "mostly stable", "stable throughout")),
 ]
 
+# Compact LLM profile field sets a route may request through `profile_schema`.
+PROFILE_SCHEMAS = ("TD", "CV")
+
 
 def _read_context(name: str) -> str:
     path = package_root() / "context_materials/profiles" / name
@@ -64,8 +67,10 @@ def instructions(skill: str) -> str:
     return "\n".join(lines)
 
 
-def build_messages(row: dict[str, Any], deterministic: dict[str, float], route: dict[str, Any]) -> list[dict[str, str]]:
-    skill = str(row["skill"]).upper()
+def build_messages(
+    row: dict[str, Any], deterministic: dict[str, float], route: dict[str, Any], profile_schema: str
+) -> list[dict[str, str]]:
+    skill = profile_schema.upper()
     context_names = ["first-principles-core.md", "descriptive-writing-profile.md"]
     context_names.append("td-first-principles.md" if skill == "TD" else "cv-first-principles.md")
     system = "\n\n".join([

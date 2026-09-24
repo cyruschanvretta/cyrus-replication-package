@@ -11,7 +11,10 @@ LIB = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(LIB))
 
 from awe_scoring.config import load_config, package_root
-from awe_scoring.estimators import ScoreVotingClassifier, build_estimator
+import joblib
+import numpy as np
+
+from awe_scoring.estimators import MedianCumulativeOrdinalClassifier, ScoreVotingClassifier, build_estimator
 from awe_scoring.evaluation import evaluate
 from awe_scoring.model_adapters import (
     BedrockAdapter,
@@ -22,23 +25,188 @@ from awe_scoring.model_adapters import (
 )
 from awe_scoring.pipeline import process_rows
 from awe_scoring.profiles import parse_profile, profile_features
-from awe_scoring.routing import hard_gate, route_key, score_to_range
+from awe_scoring.routing import compile_spec, hard_gate, resolve_route
+
+CAEC_CONFIG = package_root() / "config/caec.yaml"
+
+
+def _gate(spec, row: dict, word_count: int) -> tuple:
+    return hard_gate(spec, resolve_route(spec, row), row, {}, word_count)
+
+
+def _config(**overrides) -> dict:
+    config = load_config()
+    config.update(overrides)
+    return config
 
 
 class RoutingTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.spec = compile_spec(load_config())
+
+    def route_name(self, language: str, skill: str | None) -> str:
+        return resolve_route(self.spec, {"language": language, "skill": skill}).name
+
     def test_four_quadrants(self) -> None:
-        self.assertEqual(route_key("English", "td"), "english-td")
-        self.assertEqual(route_key("en", "CV"), "english-cv")
-        self.assertEqual(route_key("French", "TD"), "french-td")
-        self.assertEqual(route_key("fr", "cv"), "french-cv")
+        self.assertEqual(self.route_name("English", "td"), "english-td")
+        self.assertEqual(self.route_name("en", "CV"), "english-cv")
+        self.assertEqual(self.route_name("French", "TD"), "french-td")
+        self.assertEqual(self.route_name("fr", "cv"), "french-cv")
+        with self.assertRaises(ValueError):
+            self.route_name("en", "OR")
+        with self.assertRaises(ValueError):
+            self.route_name("en", None)  # two English routes: skill is required
 
     def test_score_first_projection(self) -> None:
-        self.assertEqual([score_to_range(value, "TD") for value in range(7)], ["Low"] * 3 + ["Medium"] * 2 + ["High"] * 2)
-        self.assertEqual([score_to_range(value, "CV") for value in range(5)], ["Low"] * 2 + ["Medium"] * 2 + ["High"])
+        td, cv = self.spec.skills["TD"], self.spec.skills["CV"]
+        self.assertEqual([td.to_range(value) for value in range(7)], ["Low"] * 3 + ["Medium"] * 2 + ["High"] * 2)
+        self.assertEqual([cv.to_range(value) for value in range(5)], ["Low"] * 2 + ["Medium"] * 2 + ["High"])
+        with self.assertRaises(ValueError):
+            cv.to_range(5)
 
     def test_hard_gates(self) -> None:
-        self.assertEqual(hard_gate({"skill": "TD", "response_text": ""}, 0), (0, "blank-or-non-linguistic"))
-        self.assertEqual(hard_gate({"skill": "CV", "response_text": "short"}, 1), (1, "cv-under-30-authored-words"))
+        spec = self.spec
+        self.assertEqual(_gate(spec, {"language": "en", "skill": "TD", "response_text": ""}, 0), (0, "blank-or-non-linguistic"))
+        self.assertEqual(_gate(spec, {"language": "en", "skill": "CV", "response_text": "short"}, 1), (1, "cv-under-30-authored-words"))
+        self.assertEqual(_gate(spec, {"language": "en", "skill": "TD", "response_text": "short"}, 1), (None, None))
+        non_linguistic = {"language": "fr", "skill": "TD", "response_text": "zzzz", "is_linguistic": False}
+        self.assertEqual(_gate(spec, non_linguistic, 40), (0, "blank-or-non-linguistic"))
+        self.assertEqual(_gate(spec, {**non_linguistic, "is_linguistic": 0}, 40), (None, None))
+
+
+class ConfigurableSkillTests(unittest.TestCase):
+    def test_custom_labels_thresholds_and_score_lists(self) -> None:
+        spec = compile_spec(_config(skills={
+            "TD": {"score_values": list(range(7)), "ranges": [
+                {"label": "Emerging", "scores": [0, 1]},
+                {"label": "Developing", "max": 3},
+                {"label": "Proficient", "max": 5},
+                {"label": "Extending", "scores": [6]},
+            ]},
+            "CV": {"score_values": list(range(5))},
+        }))
+        td = spec.skills["TD"]
+        self.assertEqual(td.labels, ["Emerging", "Developing", "Proficient", "Extending"])
+        self.assertEqual(
+            [td.to_range(value) for value in range(7)],
+            ["Emerging"] * 2 + ["Developing"] * 2 + ["Proficient"] * 2 + ["Extending"],
+        )
+        # Without ranges each score is its own category.
+        self.assertEqual(spec.skills["CV"].labels, ["0", "1", "2", "3", "4"])
+
+    def test_invalid_skills_and_gates_are_rejected(self) -> None:
+        cv = {"score_values": list(range(5))}
+        blank = {"field": "response_text", "blank": True}
+        invalid = {
+            "overlapping ranges": {"skills": {"TD": {"score_values": [0, 1, 2], "ranges": [
+                {"label": "A", "scores": [0, 1]}, {"label": "B", "scores": [1, 2]}]}, "CV": cv}},
+            "uncovered score": {"skills": {"TD": {"score_values": [0, 1, 2], "ranges": [{"label": "A", "max": 1}]}, "CV": cv}},
+            "duplicate labels": {"skills": {"TD": {"score_values": [0, 1], "ranges": [
+                {"label": "A", "max": 0}, {"label": "A", "max": 1}]}, "CV": cv}},
+            "gate score outside scale": {"hard_gates": [{"name": "x", "score": 7, "when": blank}]},
+            "unknown gate operator": {"hard_gates": [{"name": "x", "score": 0, "when": {"field": "response_text", "like": "a"}}]},
+        }
+        for name, overrides in invalid.items():
+            with self.subTest(name):
+                with self.assertRaises(ValueError):
+                    compile_spec(_config(**overrides))
+
+    def test_invalid_routes_are_rejected(self) -> None:
+        mutations = {
+            "unknown learner": {"learner": "gradient_boosting"},
+            "undefined skill": {"skill": "OR"},
+            "feature view mismatch": {"feature_view": "combined"},
+            "duplicate selector": {"skill": "CV"},
+        }
+        for name, change in mutations.items():
+            with self.subTest(name):
+                config = load_config()
+                config["routes"]["english-td"].update(change)
+                with self.assertRaises(ValueError):
+                    compile_spec(config)
+        config = load_config()
+        config["skills"]["OR"] = {"score_values": [0, 1, 2]}
+        config["routes"]["english-or"] = {"language": "en", "skill": "OR", "uses_llm": True, "learner": "random_forest_depth4"}
+        with self.assertRaisesRegex(ValueError, "profile_schema"):
+            compile_spec(config)
+        config["routes"]["english-or"]["profile_schema"] = "CV"
+        self.assertEqual(compile_spec(config).routes["english-or"].profile_schema, "CV")
+
+    def test_learner_is_switchable_per_route(self) -> None:
+        config = load_config()
+        config["routes"]["english-td"].update({"learner": "cumulative_ordinal_median_c003", "repeats": 1, "folds": 2})
+        rows = [{
+            "id": f"td-{score}-{copy}", "route": "english-td", "expert_score": score,
+            "features": {"det_signal": float(score), "det_copy": float(copy)},
+        } for score in range(7) for copy in range(2)]
+        with tempfile.TemporaryDirectory() as temporary:
+            bundle = Path(temporary) / "models.joblib"
+            report, _ = evaluate(rows, config, bundle)
+            fitted = joblib.load(bundle)["routes"]["english-td"]
+        self.assertEqual(report["routes"]["english-td"]["learner"], "cumulative_ordinal_median_c003")
+        self.assertIsInstance(fitted["estimator"].steps[-1][1], MedianCumulativeOrdinalClassifier)
+
+
+class _ZeroEstimator:
+    def predict(self, x: np.ndarray) -> np.ndarray:
+        return np.zeros(len(x), dtype=int)
+
+
+class CaecTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.config = load_config(CAEC_CONFIG)
+        self.spec = compile_spec(self.config)
+
+    def test_rows_without_skill_route_by_language(self) -> None:
+        self.assertEqual(resolve_route(self.spec, {"language": "en"}).name, "english-holistic")
+        self.assertEqual(resolve_route(self.spec, {"language": "French", "skill": "holistic"}).name, "french-holistic")
+        with self.assertRaises(ValueError):
+            resolve_route(self.spec, {"language": "en", "skill": "TD"})
+
+    def test_only_blank_responses_score_zero(self) -> None:
+        self.assertEqual(_gate(self.spec, {"language": "en", "response_text": "  \n"}, 0), (0, "blank-response"))
+        self.assertEqual(_gate(self.spec, {"language": "en", "response_text": "Hi"}, 1), (None, None))
+        self.assertEqual(_gate(self.spec, {"language": "en", "response_text": "zz", "is_linguistic": False}, 1), (None, None))
+
+    def test_pass_fail_projection(self) -> None:
+        skill = self.spec.skills["HOLISTIC"]
+        self.assertEqual([skill.to_range(value) for value in range(10)], ["Fail"] * 5 + ["Pass"] * 5)
+
+    def test_ungated_predictions_never_fall_below_one(self) -> None:
+        bundle = {"routes": {"english-holistic": {
+            "estimator": _ZeroEstimator(), "feature_names": ["det_portable_word_count"], "score_min": 0,
+        }}}
+        rows = [
+            {"id": "blank", "language": "en", "response_text": ""},
+            {"id": "word", "language": "en", "response_text": "Hello"},
+        ]
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "bundle.joblib"
+            joblib.dump(bundle, path)
+            output = {row["id"]: row for row in process_rows(rows, self.config, bundle_path=path)}
+        self.assertEqual((output["blank"]["stage2_score"], output["blank"]["scoring_source"]), (0, "hard-gate"))
+        self.assertEqual((output["word"]["stage2_score"], output["word"]["hml"]), (1, "Fail"))
+        self.assertEqual(output["word"]["skill"], "HOLISTIC")
+
+    def test_evaluation_applies_gates_and_reports_pass_fail(self) -> None:
+        self.config["routes"]["english-holistic"].update({"repeats": 1, "folds": 2})
+        rows = [{
+            "id": f"h-{score}-{copy}", "route": "english-holistic", "expert_score": score, "hard_score": None,
+            "features": {"det_signal": float(score), "det_copy": float(copy)},
+        } for score in range(1, 10) for copy in range(2)]
+        rows += [{
+            "id": f"blank-{copy}", "route": "english-holistic", "expert_score": 0, "hard_score": 0,
+            "features": {"det_signal": 0.0, "det_copy": float(copy)},
+        } for copy in range(3)]
+        report, predictions = evaluate(rows, self.config)
+        route = report["routes"]["english-holistic"]
+        self.assertEqual(route["range_labels"], ["Fail", "Pass"])
+        self.assertEqual((route["n"], route["n_hard_gated"]), (21, 3))
+        for row in predictions:
+            if row["id"].startswith("blank"):
+                self.assertEqual(row["predicted_score"], 0)
+            else:
+                self.assertGreaterEqual(row["predicted_score"], 1)
 
 
 class ProfileTests(unittest.TestCase):

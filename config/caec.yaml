@@ -1,0 +1,82 @@
+schema_version: 1
+seed: 20260913
+
+# CAEC: one holistic 0-9 score per response. Only an empty response scores 0;
+# any written response scores at least 1. Use with --config config/caec.yaml.
+
+model:
+  recommended_family: gemma-3-12b-it
+  adapter: bedrock
+  temperature: 0
+  max_tokens: 80
+  timeout_seconds: 120
+  concurrency: 5
+  retries: 4
+  bedrock:
+    model_id_env: BEDROCK_MODEL_ID
+    region_env: AWS_REGION
+    model_id: null
+    model_family: meta.llama3-70b-instruct-v1:0
+    botocore_max_attempts: 3
+  sagemaker:
+    endpoint_name_env: AWE_SAGEMAKER_ENDPOINT
+    region_env: AWS_REGION
+    payload_mode: messages
+    content_type: application/json
+    accept: application/json
+  http:
+    url_env: AWE_MODEL_URL
+    token_env: AWE_MODEL_TOKEN
+    payload_mode: messages
+  ollama:
+    url_env: AWE_OLLAMA_URL
+    model_env: AWE_OLLAMA_MODEL
+    url: http://127.0.0.1:11434
+    model: gemma3:12b
+    think: false
+  callable:
+    target: null
+
+deterministic:
+  mode: portable
+  prefer_provided: true
+
+evaluation:
+  save_full_fit_models: true
+  bootstrap_samples: 10000
+  # Blank responses take the gate score and are held out of model fitting.
+  apply_hard_gates: true
+
+skills:
+  HOLISTIC:
+    score_values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    # Model predictions for any response not caught by a gate never fall below 1.
+    ungated_min_score: 1
+    ranges:
+      - {label: Fail, max: 4}
+      - {label: Pass, max: 9}
+
+hard_gates:
+  - name: blank-response
+    score: 0
+    when: {field: response_text, blank: true}
+
+# Rows may omit `skill`; each language has a single CAEC route. The learner can
+# be switched to any name in awe_scoring.estimators.LEARNERS.
+routes:
+  english-holistic:
+    language: en
+    skill: HOLISTIC
+    uses_llm: false
+    feature_view: deterministic
+    learner: cumulative_ordinal_median_c003
+    repeats: 3
+    folds: 5
+  french-holistic:
+    language: fr
+    skill: HOLISTIC
+    uses_llm: false
+    feature_view: deterministic
+    learner: random_forest_depth4
+    repeats: 3
+    folds: 5

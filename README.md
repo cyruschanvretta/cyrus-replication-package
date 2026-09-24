@@ -67,3 +67,21 @@ row's exact numeric `deterministic_features` and use
 `deterministic.mode: provided`.
 
 Start with `docs/01-overview.md` and `docs/07-replication-protocol.md`.
+
+## Other assessments (CAEC)
+
+Skills, score values, reporting ranges, hard gates, and the learner for each
+route are set in the config file; see "Configuring skills, gates, and routes"
+in `docs/04-routing-patterns.md`. `config/caec.yaml` configures CAEC: one
+holistic 0–9 score, 0 only for an empty response, a minimum of 1 for any
+written response, and Fail (0–4) / Pass (5–9) ranges. Pass it to both scripts:
+
+```powershell
+.venv/Scripts/python lib/scripts/run.py --config config/caec.yaml --input responses/caec.jsonl --output artifacts/caec-features.jsonl
+.venv/Scripts/python lib/scripts/evaluate.py --config config/caec.yaml --input artifacts/caec-features.jsonl --output artifacts/caec-evaluation
+```
+
+`config/default.yaml` gained `skills` and `hard_gates` sections that restate
+the former hard-coded TD/CV rules exactly. OSSLT/TPCL features, predictions,
+metrics, and existing model bundles are unchanged. Only the config file hash
+recorded in manifests differs.
