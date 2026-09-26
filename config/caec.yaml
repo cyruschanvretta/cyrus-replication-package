@@ -70,8 +70,8 @@ routes:
     uses_llm: false
     feature_view: deterministic
     learner: cumulative_ordinal_median_c003
-    repeats: 3
-    folds: 5
+    repeats: 5
+    folds: 3
   french-holistic:
     language: fr
     skill: HOLISTIC
